@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Translation #<%= @the_translation.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/translations">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_translation/<%= @the_translation.id %>">
+          Delete translation
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Word in target language
+      </dt>
+      <dd>
+        <%= @the_translation.word_in_target_language_id %>
+      </dd>
+
+      <dt>
+        Word in base language
+      </dt>
+      <dd>
+        <%= @the_translation.word_in_base_language_id %>
+      </dd>
+
+      <dt>
+        Learning path
+      </dt>
+      <dd>
+        <%= @the_translation.learning_path_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_translation.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_translation.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit translation
+    </h2>
+
+    <form action="/modify_translation/<%= @the_translation.id %>"  method="post" >
+      <div>
+        <label for="word_in_target_language_id_box">
+          Word in target language
+        </label>
+
+        <input type="text" id="word_in_target_language_id_box" name="query_word_in_target_language_id" value="<%= @the_translation.word_in_target_language_id %>">
+      </div>
+
+      <div>
+        <label for="word_in_base_language_id_box">
+          Word in base language
+        </label>
+
+        <input type="text" id="word_in_base_language_id_box" name="query_word_in_base_language_id" value="<%= @the_translation.word_in_base_language_id %>">
+      </div>
+
+      <div>
+        <label for="learning_path_id_box">
+          Learning path
+        </label>
+
+        <input type="text" id="learning_path_id_box" name="query_learning_path_id" value="<%= @the_translation.learning_path_id %>">
+      </div>
+
+      <button>
+        Update translation
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,71 @@
+<div>
+  <div>
+    <h1>
+      Language #<%= @the_language.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/languages">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_language/<%= @the_language.id %>">
+          Delete language
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @the_language.name %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_language.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_language.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit language
+    </h2>
+
+    <form action="/modify_language/<%= @the_language.id %>"  method="post" >
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name" value="<%= @the_language.name %>">
+      </div>
+
+      <button>
+        Update language
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

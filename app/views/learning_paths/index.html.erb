@@ -1,0 +1,134 @@
+<div>
+  <div>
+    <h1>
+      List of all learning paths
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new learning path
+    </h2>
+
+    <form action="/insert_learning_path" method="post">
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id">
+      </div>
+
+      <div>
+        <label for="title_box">
+          Title
+        </label>
+
+        <input type="text" id="title_box" name="query_title">
+      </div>
+
+      <div>
+        <label for="target_language_id_box">
+          Target language
+        </label>
+
+        <input type="text" id="target_language_id_box" name="query_target_language_id">
+      </div>
+
+      <div>
+        <label for="base_language_id_box">
+          Base language
+        </label>
+
+        <input type="text" id="base_language_id_box" name="query_base_language_id">
+      </div>
+
+      <button>
+        Create learning path
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Title
+        </th>
+
+        <th>
+          Target language
+        </th>
+
+        <th>
+          Base language
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_learning_paths.each do |a_learning_path| %>
+      <tr>
+        <td>
+          <%= a_learning_path.id %>
+        </td>
+
+        <td>
+          <%= a_learning_path.user_id %>
+        </td>
+
+        <td>
+          <%= a_learning_path.title %>
+        </td>
+
+        <td>
+          <%= a_learning_path.target_language_id %>
+        </td>
+
+        <td>
+          <%= a_learning_path.base_language_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_learning_path.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_learning_path.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/learning_paths/<%= a_learning_path.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,116 @@
+<div>
+  <div>
+    <h1>
+      Learning path #<%= @the_learning_path.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/learning_paths">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_learning_path/<%= @the_learning_path.id %>">
+          Delete learning path
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_learning_path.user_id %>
+      </dd>
+
+      <dt>
+        Title
+      </dt>
+      <dd>
+        <%= @the_learning_path.title %>
+      </dd>
+
+      <dt>
+        Target language
+      </dt>
+      <dd>
+        <%= @the_learning_path.target_language_id %>
+      </dd>
+
+      <dt>
+        Base language
+      </dt>
+      <dd>
+        <%= @the_learning_path.base_language_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_learning_path.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_learning_path.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit learning path
+    </h2>
+
+    <form action="/modify_learning_path/<%= @the_learning_path.id %>"  method="post" >
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_learning_path.user_id %>">
+      </div>
+
+      <div>
+        <label for="title_box">
+          Title
+        </label>
+
+        <input type="text" id="title_box" name="query_title" value="<%= @the_learning_path.title %>">
+      </div>
+
+      <div>
+        <label for="target_language_id_box">
+          Target language
+        </label>
+
+        <input type="text" id="target_language_id_box" name="query_target_language_id" value="<%= @the_learning_path.target_language_id %>">
+      </div>
+
+      <div>
+        <label for="base_language_id_box">
+          Base language
+        </label>
+
+        <input type="text" id="base_language_id_box" name="query_base_language_id" value="<%= @the_learning_path.base_language_id %>">
+      </div>
+
+      <button>
+        Update learning path
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
