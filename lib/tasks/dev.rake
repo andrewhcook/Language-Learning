@@ -33,7 +33,7 @@ task({ :make_tables => :environment }) do
   learning_path.save
 end
 task({ :sample_data => :environment }) do
-  sample_data_file = ActionDispatch::UploadedFile.new(tempfile: Rails.root.join("lib", "sample_data", "Amelie_Sample_Data.srt").open, filename: "Amelie_Sample_Data.srt", type: "text/plain")
+  sample_data_file = ActionDispatch::Http::UploadedFile.new(tempfile: Rails.root.join("lib", "sample_data", "Amelie_Sample_Data.srt").open, filename: "Amelie_Sample_Data.srt", type: "text/plain")
 
   counter = 0
   File.open(sample_data_file) do |file|
@@ -68,7 +68,7 @@ task({ :sample_data => :environment }) do
   # make translations queries
 end
 task({ :add_translations => :environment }) do
-  api_url = "http://localhost:5000/"
+  api_url = "http://localhost:5000/translate"
 
   Word.where(language_id: Language.find_by(:name => "French").id).all.each do |word|
     if !Translation.find_by(:word_in_target_language => word).nil?
@@ -84,11 +84,8 @@ task({ :add_translations => :environment }) do
       source: source_language,
       target: target_language,
       format: "text",
+      api_key: ""
     }
-
-    request = Net::HTTP::Post.new(api_url)
-    request["Content-Type"] = "application/json"
-    request.body = request_data.to_json
 
     # Make the request
     response = HTTP.post(api_url, json: request_data, headers: { "Content-Type" => "application/json" })
@@ -97,7 +94,7 @@ task({ :add_translations => :environment }) do
       # Parse the JSON response
       translation = JSON.parse(response.body)
       translated_word = translation["translatedText"]
-      puts "Translation: #{translated_text}"
+      puts "Translation: #{translated_word}"
 
       if Word.where(word: translated_word).where(language_id: Language.where(name: "French").first.id).first.nil?
         new_word = Word.new

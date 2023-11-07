@@ -86,15 +86,15 @@
         </td>
 
         <td>
-          <%= a_translation.word_in_target_language_id %>
+          <%= Word.find(a_translation.word_in_target_language_id).word %>
         </td>
 
         <td>
-          <%= a_translation.word_in_base_language_id %>
+          <%= Word.find(a_translation.word_in_base_language_id).word %>
         </td>
 
         <td>
-          <%= a_translation.learning_path_id %>
+          <%= LearningPath.find(a_translation.learning_path_id).title %>
         </td>
 
         <td>
