@@ -18,10 +18,12 @@ task({ :make_tables => :environment }) do
 
   french = Language.new
   french.name = "French"
+  french.shortcode = "fr"
   french.save
 
   english = Language.new
   english.name = "English"
+  english.shortcode = "en"
   english.save
 
   learning_path = LearningPath.new
@@ -46,41 +48,41 @@ task({ :sample_data => :environment }) do
       if line.at(0) =~ /\d/
         next
       end
-      line.split(" ").each do |a_word|
+      line.split(/!.?/).each do |a_line|
         counter += 1
-        word = a_word.downcase.gsub(".", "").gsub(",", "").gsub("?", "").gsub("\"", "").gsub("!", "").gsub("(", "").gsub(")", "")
+        
         #search database for word
         # if no record is returned
         # add word as record
-        if !Word.where(:word => word).first.nil? || word =~ /\d/
+        if !Expression.where(:body => a_line).first.nil? || a_line =~ /\d/
           next
         else
-          the_word = Word.new
-          the_word.language_id = Language.find_by(name: "French").id
-          the_word.word = word
-          the_word.save
+          the_expression = Expression.new
+          the_expression.language_id = Language.find_by(name: "French").id
+          the_expression.body = a_line
+          the_expression.save
         end
       end
     end
   end
-  pp "#{Word.all.length} records created"
-  pp "#{counter} words in movie"
+  pp "#{Expression.all.length} records created"
+  pp "#{counter} lines in movie"
   # make translations queries
 end
 task({ :add_translations => :environment }) do
   api_url = "http://localhost:5000/translate"
 
-  Word.where(language_id: Language.find_by(:name => "French").id).all.each do |word|
-    if !Translation.find_by(:word_in_target_language => word).nil?
+  Expression.where(language_id: Language.find_by(:name => "French").id).all.each do |expression|
+    if !Translation.find_by(:expression_in_target_language => expression).nil?
       next
     end
-    word_to_translate = word.word
+    expression_to_translate = expression.body
     source_language = "fr"
     target_language = "en"
 
     # Create a Hash with the request parameters
     request_data = {
-      q: word_to_translate,
+      q: expression_to_translate,
       source: source_language,
       target: target_language,
       format: "text",
@@ -93,21 +95,21 @@ task({ :add_translations => :environment }) do
       pp "here"
       # Parse the JSON response
       translation = JSON.parse(response.body)
-      translated_word = translation["translatedText"]
-      puts "Translation: #{translated_word}"
+      translated_expression = translation["translatedText"]
+      puts "Translation: #{translated_expression}"
 
-      if Word.where(word: translated_word).where(language_id: Language.where(name: "French").first.id).first.nil?
-        new_word = Word.new
-        new_word.word = translated_word
-        new_word.language_id = Language.find_by(name: "English").id
-        new_word.save
+      if Expression.where(body: translated_expression).where(language_id: Language.where(name: "French").first.id).first.nil?
+        new_expression = Expression.new
+        new_expression.body = translated_expression
+        new_expression.language_id = Language.find_by(name: "English").id
+        new_expression.save
 
-        if Translation.where(word_in_base_language: translated_word).where(word_in_target_language: word).first.nil?
+        if Translation.where(expression_in_base_language: translated_expression).where(expression_in_target_language: translated_expression).first.nil?
           translation = Translation.new
           #error at learning_path
           translation.learning_path_id = LearningPath.find_by(title: "Amelie Flashcards").id
-          translation.word_in_base_language_id = new_word.id
-          translation.word_in_target_language_id = word.id
+          translation.expression_in_base_language_id = new_expression.id
+          translation.expression_in_target_language_id = expression.id
           # pp 'here'
           translation.save
         end

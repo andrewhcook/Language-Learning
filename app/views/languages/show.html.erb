@@ -27,6 +27,13 @@
       </dd>
 
       <dt>
+        Shortcode
+      </dt>
+      <dd>
+        <%= @the_language.shortcode %>
+      </dd>
+
+      <dt>
         Created at
       </dt>
       <dd>
@@ -59,6 +66,14 @@
         </label>
 
         <input type="text" id="name_box" name="query_name" value="<%= @the_language.name %>">
+      </div>
+
+      <div>
+        <label for="shortcode_box">
+          Shortcode
+        </label>
+
+        <input type="text" id="shortcode_box" name="query_shortcode" value="<%= @the_language.shortcode %>">
       </div>
 
       <button>

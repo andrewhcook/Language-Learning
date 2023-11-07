@@ -24,11 +24,11 @@
       </div>
 
       <div>
-        <label for="title_box">
-          Title
+        <label for="base_language_id_box">
+          Base language
         </label>
 
-        <input type="text" id="title_box" name="query_title">
+        <input type="text" id="base_language_id_box" name="query_base_language_id">
       </div>
 
       <div>
@@ -37,14 +37,6 @@
         </label>
 
         <input type="text" id="target_language_id_box" name="query_target_language_id">
-      </div>
-
-      <div>
-        <label for="base_language_id_box">
-          Base language
-        </label>
-
-        <input type="text" id="base_language_id_box" name="query_base_language_id">
       </div>
 
       <button>
@@ -68,15 +60,11 @@
         </th>
 
         <th>
-          Title
+          Base language
         </th>
 
         <th>
           Target language
-        </th>
-
-        <th>
-          Base language
         </th>
 
         <th>
@@ -102,15 +90,11 @@
         </td>
 
         <td>
-          <%= a_learning_path.title %>
+          <%= a_learning_path.base_language_id %>
         </td>
 
         <td>
           <%= a_learning_path.target_language_id %>
-        </td>
-
-        <td>
-          <%= a_learning_path.base_language_id %>
         </td>
 
         <td>

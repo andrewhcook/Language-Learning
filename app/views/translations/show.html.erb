@@ -20,17 +20,17 @@
 
     <dl>
       <dt>
-        Word in target language
+        Expression in base language
       </dt>
       <dd>
-        <%= Word.find(@the_translation.word_in_target_language_id).word %>
+        <%= @the_translation.expression_in_base_language_id %>
       </dd>
 
       <dt>
-        Word in base language
+        Expression in target language
       </dt>
       <dd>
-        <%= Word.find(@the_translation.word_in_base_language_id).word %>
+        <%= @the_translation.expression_in_target_language_id %>
       </dd>
 
       <dt>
@@ -68,19 +68,19 @@
 
     <form action="/modify_translation/<%= @the_translation.id %>"  method="post" >
       <div>
-        <label for="word_in_target_language_id_box">
-          Word in target language
+        <label for="expression_in_base_language_id_box">
+          Expression in base language
         </label>
 
-        <input type="text" id="word_in_target_language_id_box" name="query_word_in_target_language_id" value="<%= @the_translation.word_in_target_language_id %>">
+        <input type="text" id="expression_in_base_language_id_box" name="query_expression_in_base_language_id" value="<%= @the_translation.expression_in_base_language_id %>">
       </div>
 
       <div>
-        <label for="word_in_base_language_id_box">
-          Word in base language
+        <label for="expression_in_target_language_id_box">
+          Expression in target language
         </label>
 
-        <input type="text" id="word_in_base_language_id_box" name="query_word_in_base_language_id" value="<%= @the_translation.word_in_base_language_id %>">
+        <input type="text" id="expression_in_target_language_id_box" name="query_expression_in_target_language_id" value="<%= @the_translation.expression_in_target_language_id %>">
       </div>
 
       <div>

@@ -20,9 +20,8 @@ class LearningPathsController < ApplicationController
   def create
     the_learning_path = LearningPath.new
     the_learning_path.user_id = params.fetch("query_user_id")
-    the_learning_path.title = params.fetch("query_title")
-    the_learning_path.target_language_id = params.fetch("query_target_language_id")
     the_learning_path.base_language_id = params.fetch("query_base_language_id")
+    the_learning_path.target_language_id = params.fetch("query_target_language_id")
 
     if the_learning_path.valid?
       the_learning_path.save
@@ -37,9 +36,8 @@ class LearningPathsController < ApplicationController
     the_learning_path = LearningPath.where({ :id => the_id }).at(0)
 
     the_learning_path.user_id = params.fetch("query_user_id")
-    the_learning_path.title = params.fetch("query_title")
-    the_learning_path.target_language_id = params.fetch("query_target_language_id")
     the_learning_path.base_language_id = params.fetch("query_base_language_id")
+    the_learning_path.target_language_id = params.fetch("query_target_language_id")
 
     if the_learning_path.valid?
       the_learning_path.save

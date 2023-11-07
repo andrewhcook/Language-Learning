@@ -23,6 +23,14 @@
         <input type="text" id="name_box" name="query_name">
       </div>
 
+      <div>
+        <label for="shortcode_box">
+          Shortcode
+        </label>
+
+        <input type="text" id="shortcode_box" name="query_shortcode">
+      </div>
+
       <button>
         Create language
       </button>
@@ -41,6 +49,10 @@
 
         <th>
           Name
+        </th>
+
+        <th>
+          Shortcode
         </th>
 
         <th>
@@ -63,6 +75,10 @@
 
         <td>
           <%= a_language.name %>
+        </td>
+
+        <td>
+          <%= a_language.shortcode %>
         </td>
 
         <td>

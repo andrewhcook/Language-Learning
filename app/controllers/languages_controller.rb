@@ -20,6 +20,7 @@ class LanguagesController < ApplicationController
   def create
     the_language = Language.new
     the_language.name = params.fetch("query_name")
+    the_language.shortcode = params.fetch("query_shortcode")
 
     if the_language.valid?
       the_language.save
@@ -34,6 +35,7 @@ class LanguagesController < ApplicationController
     the_language = Language.where({ :id => the_id }).at(0)
 
     the_language.name = params.fetch("query_name")
+    the_language.shortcode = params.fetch("query_shortcode")
 
     if the_language.valid?
       the_language.save

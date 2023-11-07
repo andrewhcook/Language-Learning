@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Expression #<%= @the_expression.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/expressions">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_expression/<%= @the_expression.id %>">
+          Delete expression
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Body
+      </dt>
+      <dd>
+        <%= @the_expression.body %>
+      </dd>
+
+      <dt>
+        Language
+      </dt>
+      <dd>
+        <%= @the_expression.language_id %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_expression.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_expression.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit expression
+    </h2>
+
+    <form action="/modify_expression/<%= @the_expression.id %>"  method="post" >
+      <div>
+        <label for="body_box">
+          Body
+        </label>
+
+        <input type="text" id="body_box" name="query_body" value="<%= @the_expression.body %>">
+      </div>
+
+      <div>
+        <label for="language_id_box">
+          Language
+        </label>
+
+        <input type="text" id="language_id_box" name="query_language_id" value="<%= @the_expression.language_id %>">
+      </div>
+
+      <button>
+        Update expression
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

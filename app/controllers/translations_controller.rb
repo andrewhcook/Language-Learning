@@ -19,8 +19,8 @@ class TranslationsController < ApplicationController
 
   def create
     the_translation = Translation.new
-    the_translation.word_in_target_language_id = params.fetch("query_word_in_target_language_id")
-    the_translation.word_in_base_language_id = params.fetch("query_word_in_base_language_id")
+    the_translation.expression_in_base_language_id = params.fetch("query_expression_in_base_language_id")
+    the_translation.expression_in_target_language_id = params.fetch("query_expression_in_target_language_id")
     the_translation.learning_path_id = params.fetch("query_learning_path_id")
 
     if the_translation.valid?
@@ -35,8 +35,8 @@ class TranslationsController < ApplicationController
     the_id = params.fetch("path_id")
     the_translation = Translation.where({ :id => the_id }).at(0)
 
-    the_translation.word_in_target_language_id = params.fetch("query_word_in_target_language_id")
-    the_translation.word_in_base_language_id = params.fetch("query_word_in_base_language_id")
+    the_translation.expression_in_base_language_id = params.fetch("query_expression_in_base_language_id")
+    the_translation.expression_in_target_language_id = params.fetch("query_expression_in_target_language_id")
     the_translation.learning_path_id = params.fetch("query_learning_path_id")
 
     if the_translation.valid?

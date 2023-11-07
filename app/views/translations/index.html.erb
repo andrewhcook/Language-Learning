@@ -16,19 +16,19 @@
 
     <form action="/insert_translation" method="post">
       <div>
-        <label for="word_in_target_language_id_box">
-          Word in target language
+        <label for="expression_in_base_language_id_box">
+          Expression in base language
         </label>
 
-        <input type="text" id="word_in_target_language_id_box" name="query_word_in_target_language_id">
+        <input type="text" id="expression_in_base_language_id_box" name="query_expression_in_base_language_id">
       </div>
 
       <div>
-        <label for="word_in_base_language_id_box">
-          Word in base language
+        <label for="expression_in_target_language_id_box">
+          Expression in target language
         </label>
 
-        <input type="text" id="word_in_base_language_id_box" name="query_word_in_base_language_id">
+        <input type="text" id="expression_in_target_language_id_box" name="query_expression_in_target_language_id">
       </div>
 
       <div>
@@ -56,11 +56,11 @@
         </th>
 
         <th>
-          Word in target language
+          Expression in base language
         </th>
 
         <th>
-          Word in base language
+          Expression in target language
         </th>
 
         <th>
@@ -86,15 +86,15 @@
         </td>
 
         <td>
-          <%= Word.find(a_translation.word_in_target_language_id).word %>
+          <%= Expression.find(a_translation.expression_in_base_language_id).body %>
         </td>
 
         <td>
-          <%= Word.find(a_translation.word_in_base_language_id).word %>
+          <%= Expression.find(a_translation.expression_in_target_language_id).body %>
         </td>
 
         <td>
-          <%= LearningPath.find(a_translation.learning_path_id).title %>
+          <%= a_translation.learning_path_id %>
         </td>
 
         <td>

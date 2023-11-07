@@ -27,10 +27,10 @@
       </dd>
 
       <dt>
-        Title
+        Base language
       </dt>
       <dd>
-        <%= @the_learning_path.title %>
+        <%= @the_learning_path.base_language_id %>
       </dd>
 
       <dt>
@@ -38,13 +38,6 @@
       </dt>
       <dd>
         <%= @the_learning_path.target_language_id %>
-      </dd>
-
-      <dt>
-        Base language
-      </dt>
-      <dd>
-        <%= @the_learning_path.base_language_id %>
       </dd>
 
       <dt>
@@ -83,11 +76,11 @@
       </div>
 
       <div>
-        <label for="title_box">
-          Title
+        <label for="base_language_id_box">
+          Base language
         </label>
 
-        <input type="text" id="title_box" name="query_title" value="<%= @the_learning_path.title %>">
+        <input type="text" id="base_language_id_box" name="query_base_language_id" value="<%= @the_learning_path.base_language_id %>">
       </div>
 
       <div>
@@ -96,14 +89,6 @@
         </label>
 
         <input type="text" id="target_language_id_box" name="query_target_language_id" value="<%= @the_learning_path.target_language_id %>">
-      </div>
-
-      <div>
-        <label for="base_language_id_box">
-          Base language
-        </label>
-
-        <input type="text" id="base_language_id_box" name="query_base_language_id" value="<%= @the_learning_path.base_language_id %>">
       </div>
 
       <button>
