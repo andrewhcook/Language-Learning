@@ -23,14 +23,14 @@
         Word in target language
       </dt>
       <dd>
-        <%= @the_translation.word_in_target_language_id %>
+        <%= Word.find(@the_translation.word_in_target_language_id).word %>
       </dd>
 
       <dt>
         Word in base language
       </dt>
       <dd>
-        <%= @the_translation.word_in_base_language_id %>
+        <%= Word.find(@the_translation.word_in_base_language_id).word %>
       </dd>
 
       <dt>
