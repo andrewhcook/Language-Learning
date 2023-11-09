@@ -26,6 +26,8 @@ task({ :make_tables => :environment }) do
   english.shortcode = "en"
   english.save
 
+end
+task({ :sample_data => :environment }) do
   learning_path = LearningPath.new
   learning_path.title = "Amelie Flashcards"
   learning_path.base_language_id = Language.find_by(name: "English").id
@@ -33,8 +35,6 @@ task({ :make_tables => :environment }) do
   ## add user_id
   learning_path.user_id = user.id
   learning_path.save
-end
-task({ :sample_data => :environment }) do
   sample_data_files = Array.new
   sample_data_file = ActionDispatch::Http::UploadedFile.new(tempfile: Rails.root.join("lib", "sample_data", "Amelie_Sample_Data.txt").open, filename: "Amelie_Sample_Data.txt", type: "text/plain")
   sample_data_file2 = ActionDispatch::Http::UploadedFile.new(tempfile: Rails.root.join("lib", "sample_data", "A Bout de Souffle.fre.srt").open, filename: "A Bout de Souffle.fre.srt", type: "text/plain")

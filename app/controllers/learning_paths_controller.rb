@@ -1,10 +1,13 @@
 class LearningPathsController < ApplicationController
   def index
-    matching_learning_paths = LearningPath.all
+    
 
-    @list_of_learning_paths = matching_learning_paths.order({ :created_at => :desc })
+    if current_user.nil?
+      redirect_to( "/users/sign_in")
+    else
+      render({ :template => "learning_paths/index" })
+    end
 
-    render({ :template => "learning_paths/index" })
   end
 
   def show
@@ -20,9 +23,10 @@ class LearningPathsController < ApplicationController
   def create
     
         the_learning_path = LearningPath.new
-        the_learning_path.user_id = params.fetch("query_user_id")
-        the_learning_path.base_language_id = params.fetch("query_base_language_id")
-        the_learning_path.target_language_id = params.fetch("query_target_language_id")
+        the_learning_path.title = params.fetch("query_title_box")
+        the_learning_path.user_id = current_user.id
+        the_learning_path.base_language_id = Language.find_by(:name => params.fetch("base_language_id_query_box")).id
+        the_learning_path.target_language_id = Language.find_by(:name => params.fetch("target_language_id_query_box")).id
         
         if the_learning_path.valid?
           the_learning_path.save
@@ -34,9 +38,6 @@ class LearningPathsController < ApplicationController
         pp params
         pp uploaded_file
         if !uploaded_file.nil?
-          # Process the uploaded file here
-          # You can save it to a specific directory or perform any other processing.
-          # For example, you can save it to the public/uploads directory:
           File.open(Rails.root.join('public', 'uploads', uploaded_file.original_filename), 'wb') do |file|
             file.write(uploaded_file.read)
           end
@@ -54,9 +55,6 @@ class LearningPathsController < ApplicationController
               end
               line.split(/!.?/).each do |a_line|
                 counter += 1
-                #search database for word
-                # if no record is returned
-                # add word as record
                 if !Expression.where(:body => a_line).first.nil? || a_line =~ /\d/
                   next
                 else
@@ -110,11 +108,6 @@ class LearningPathsController < ApplicationController
             
             pp "#{Expression.all.length} records created"
             pp "#{counter} lines in movie"
-           ##
-              
-          
-              # Make the request
-            
             end
           end
         else
