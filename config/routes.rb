@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   # Routes for the Expression resource:
   root "learning_paths#index"
-  
+  # file uploader
+  post 'upload_file' => 'file_upload#upload'
   # CREATE
   post("/insert_expression", { :controller => "expressions", :action => "create" })
           

@@ -1,3 +1,5 @@
+<% user_id = current_user.id %>
+
 <div>
   <div>
     <h1>
@@ -78,8 +80,8 @@
         <th>
         </th>
       </tr>
-
-      <% @list_of_translations.each do |a_translation| %>
+<% list_of_translations = Translations.where(:user_id => user_id).all %>
+      <% list_of_translations.each do |a_translation| %>
       <tr>
         <td>
           <%= a_translation.id %>

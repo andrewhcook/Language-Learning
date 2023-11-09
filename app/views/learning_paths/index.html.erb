@@ -1,9 +1,8 @@
+
 <div>
-  <div>
-    <h1>
-      List of all learning paths
-    </h1>
-  </div>
+  <h1>
+    List of all learning paths
+  </h1>
 </div>
 
 <hr>
@@ -14,35 +13,38 @@
       Add a new learning path
     </h2>
 
-    <form action="/insert_learning_path" method="post">
+    <%= form_with(url: "/insert_learning_path", method: :post) do |form| %>
       <div>
         <label for="user_id_box">
           User
         </label>
-
-        <input type="text" id="user_id_box" name="query_user_id">
+        <%= form.text_field :query_user_id, id: "user_id_box" %>
       </div>
 
       <div>
         <label for="base_language_id_box">
           Base language
         </label>
-
-        <input type="text" id="base_language_id_box" name="query_base_language_id">
+        <%= form.text_field :query_base_language_id, id: "base_language_id_box" %>
       </div>
 
       <div>
         <label for="target_language_id_box">
           Target language
         </label>
-
-        <input type="text" id="target_language_id_box" name="query_target_language_id">
+        <%= form.text_field :query_target_language_id, id: "target_language_id_box" %>
       </div>
 
-      <button>
-        Create learning path
-      </button>
-    </form>
+      
+  <div class="field">
+    <%= form.label :file, 'Choose a file' %>
+    <%= form.file_field :file, accept: '.srt, .txt' %>
+  </div>
+
+      <div class="actions">
+        <%= form.submit 'Create learning path' %>
+      </div>
+    <% end %>
   </div>
 </div>
 

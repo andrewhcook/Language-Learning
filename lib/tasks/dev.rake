@@ -1,7 +1,7 @@
-desc "Fill the database tables with some sample data"
 
 require "net/http"
 require "json"
+desc "Fill the database tables with some sample data"
 task({ :drop_tables => :environment }) do
   if Rails.env.development?
     LearningPath.destroy_all
@@ -35,10 +35,14 @@ task({ :make_tables => :environment }) do
   learning_path.save
 end
 task({ :sample_data => :environment }) do
-  sample_data_file = ActionDispatch::Http::UploadedFile.new(tempfile: Rails.root.join("lib", "sample_data", "Amelie_Sample_Data.srt").open, filename: "Amelie_Sample_Data.srt", type: "text/plain")
-
+  sample_data_files = Array.new
+  sample_data_file = ActionDispatch::Http::UploadedFile.new(tempfile: Rails.root.join("lib", "sample_data", "Amelie_Sample_Data.txt").open, filename: "Amelie_Sample_Data.txt", type: "text/plain")
+  sample_data_file2 = ActionDispatch::Http::UploadedFile.new(tempfile: Rails.root.join("lib", "sample_data", "A Bout de Souffle.fre.srt").open, filename: "A Bout de Souffle.fre.srt", type: "text/plain")
+  sample_data_files.push(sample_data_file)
+  sample_data_files.push(sample_data_file2)
+  sample_data_files.each do |sample_file|
   counter = 0
-  File.open(sample_data_file) do |file|
+  File.open(sample_file) do |file|
     # pp file
     file.each do |line|
       #  pp line
@@ -69,6 +73,7 @@ task({ :sample_data => :environment }) do
   pp "#{counter} lines in movie"
   # make translations queries
 end
+end
 task({ :add_translations => :environment }) do
   api_url = "http://localhost:5000/translate"
 
@@ -92,11 +97,10 @@ task({ :add_translations => :environment }) do
     # Make the request
     response = HTTP.post(api_url, json: request_data, headers: { "Content-Type" => "application/json" })
     if response.code.to_i == 200
-      pp "here"
       # Parse the JSON response
       translation = JSON.parse(response.body)
       translated_expression = translation["translatedText"]
-      puts "Translation: #{translated_expression}"
+      #puts "Translation: #{translated_expression}"
 
       if Expression.where(body: translated_expression).where(language_id: Language.where(name: "French").first.id).first.nil?
         new_expression = Expression.new

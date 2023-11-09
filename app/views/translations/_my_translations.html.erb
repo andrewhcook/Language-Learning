@@ -1,19 +1,4 @@
-<div>
-  <div>
-    <h1>
-      Learning path #<%= @the_learning_path.id %> details
-    </h1>
-
-    <div>
-      <div>
-        <a href="/learning_paths">
-          Go back
-        </a>
-      </div>
-
-     <div>
-     <div>
-     <% user_id = current_user.id %>
+<% user_id = current_user.id %>
 <% learning_id = LearningPath.find_by(user_id: user_id).id %>
 <table border="1">
       <tr>
@@ -45,7 +30,7 @@
         </th>
       </tr>
 
-<% list_of_translations = Translation.where(:learning_path_id => @the_learning_path.id).all %>
+<% list_of_translations = Translation.where(:learning_path_id => learning_id).all %>
       <% list_of_translations.each do |a_translation| %>
       <tr>
         <td>
@@ -79,9 +64,3 @@
       </tr>
       <% end %>
     </table>
-
-     </div>
-     </div>
-</div>
-</div>
-</div>
