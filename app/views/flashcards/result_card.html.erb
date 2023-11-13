@@ -1,0 +1,11 @@
+<div>
+Expression in Target Language: <%= Expression.where(id: @first).first.body %>
+</div>
+
+<div>
+Translation: <%= Expression.where(id: Translation.where(expression_in_target_language_id: @first).first.expression_in_base_language_id).first.body %>
+</div>
+
+<div>
+ You answered this card: <%= @result ? "Correct" : "Incorrect" %>
+<div>

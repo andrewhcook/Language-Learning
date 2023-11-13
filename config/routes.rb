@@ -76,7 +76,8 @@ Rails.application.routes.draw do
   get("/delete_language/:path_id", { :controller => "languages", :action => "destroy" })
 
   #------------------------------
-
+  post("flashcards/result", {:controller => "flashcards", :action => "show_results"})
+  get("flashcards/question", {:controller => "flashcards", :action => "show_question_card"})
   devise_for :users
  
   

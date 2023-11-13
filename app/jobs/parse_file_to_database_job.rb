@@ -15,20 +15,24 @@ class ParseFileToDatabaseJob < ApplicationJob
         file.each do |line|
           #  pp line
           next unless line.valid_encoding?
-          next if line.at(0) =~ /\d/
-
+          next if line.at(0) =~ /\d/ || line.strip.empty?
           line.split(/!.?/).each do |a_line|
             counter += 1
-            next if !Expression.where(body: a_line).first.nil? || a_line =~ /\d/
+            ## change next line to be next if the expression already exists in this learning_path OR the line contains a number
+           # next if !Translation.where(:expression_in_target_language_id => Expression.find_by(body: a_line).id).where(:learning_path_id => the_learning_path.id).first.nil? || a_line =~ /\d/
+           if Expression.where(body: a_line.strip).first.nil?
+           elsif  Translation.where(learning_path_id: the_learning_path.id).where(expression_in_target_language_id: Expression.where(body: a_line.strip).first.id).count > 0  || a_line.strip.empty?
+             next 
+           end
 
             the_expression = Expression.new
             the_expression.language_id = Language.find(the_learning_path.target_language_id).id
-            the_expression.body = a_line
+            the_expression.body = a_line.strip
             the_expression.save
-
             # add translation queries
             api_url = 'http://localhost:5000/translate'
-            next unless Translation.where(:learning_path_id => the_learning_path.id).find_by(expression_in_target_language: the_expression).nil?
+            
+            next unless Translation.where(:learning_path_id => the_learning_path.id).where(expression_in_target_language_id: the_expression.id).count == 0
 
             expression_to_translate = the_expression.body
             source_language = Language.find(the_learning_path.target_language_id).shortcode
