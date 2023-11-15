@@ -1,5 +1,10 @@
 
+
+<% if @learning_path_id.nil? %>
 <% card = Translation.all.sample %>
+<% else  %>
+<% card = Translation.where(learning_path_id: @learning_path_id).sample %>
+<% end %>
 <% phrase = Expression.find(card.expression_in_target_language_id) %>
 <% correct_translation = Expression.find(card.expression_in_base_language_id) %>
 <% translations = Array.new %>
@@ -15,7 +20,6 @@
 <div>
 which translation matches the following phrase?
 </div>
-<div name = "question" >
 <div value = <%= phrase.id %>>
 </div> 
 <div>
@@ -23,10 +27,10 @@ which translation matches the following phrase?
 </div>
 </div>
 
-<form action = "/flashcards/result" method = "post">
+<form action = "/flashcards/result" method = "post" data-turbo = "false">
  <input type="hidden" name="question" value="<%= phrase.id %>">
 <select name="selected_translation">
-<% translations.each do |translation| %>
+<% translations.shuffle.each do |translation| %>
 <option value="<%= translation.id %>">
 <%= translation.body %>
 </option>

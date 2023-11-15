@@ -2,6 +2,7 @@
 <nav class = "navbar navbar-expand-lg navbar-light bg-light"> 
 <%= link_to "Home", learning_paths_path, class: "nav-link active" %>
 <%= current_user.nil? ? link_to("Sign-In", new_user_session_path, {:class => "nav-link active"}) : link_to("Edit Profile", edit_user_registration_path, {:class => "nav-link active"})  %>
-<%= current_user.nil? ? link_to("Sign-Up", new_user_registration_path, {:class => "nav-link active"}) : button_to("Logout", destroy_user_session_path, method: "delete",:class => "nav-link active") %>
-
+<%= current_user.nil? ? link_to("Sign-Up", new_user_registration_path, {:class => "nav-link active"}) :  button_to("Logout", destroy_user_session_path, method: "delete",:class => "nav-link active") %> 
+<%= current_user.nil? ? nil : link_to("Multiple Choice", flashcards_question_path, {:class => "nav-link active"}) %>
+<%= current_user.nil? ? nil : link_to("Translation Quiz", flashcards_quiz_path, {:class => "nav-link active"}) %>
 </nav>

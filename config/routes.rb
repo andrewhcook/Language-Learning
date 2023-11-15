@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   # Routes for the Expression resource:
+  # get("/", {:controller => "homepage", :action => "index"})
+
   root "learning_paths#index"
+
   # file uploader
   post 'upload_file' => 'file_upload#upload'
   # CREATE
@@ -47,8 +50,11 @@ Rails.application.routes.draw do
   # READ
   get("/learning_paths", { :controller => "learning_paths", :action => "index" })
   
+  get("/learning_paths/tutorial", {:controller => "learning_paths", :action => "tutorial"})
+  
   get("/learning_paths/:path_id", { :controller => "learning_paths", :action => "show" })
   
+
   # UPDATE
   
   post("/modify_learning_path/:path_id", { :controller => "learning_paths", :action => "update" })
@@ -78,6 +84,8 @@ Rails.application.routes.draw do
   #------------------------------
   post("flashcards/result", {:controller => "flashcards", :action => "show_results"})
   get("flashcards/question", {:controller => "flashcards", :action => "show_question_card"})
+  get("flashcards/quiz", {:controller => "flashcards", :action => "show_quiz_card"})
+  get("flashcards/show_quiz_results", {:controller => "flashcards", :action => "show_quiz_results"})
   devise_for :users
  
   

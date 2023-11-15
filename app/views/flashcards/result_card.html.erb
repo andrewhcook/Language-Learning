@@ -9,3 +9,5 @@ Translation: <%= Expression.where(id: Translation.where(expression_in_target_lan
 <div>
  You answered this card: <%= @result ? "Correct" : "Incorrect" %>
 <div>
+
+<%= link_to("Next", flashcards_question_path, {:class => "nav-link active"}) %>

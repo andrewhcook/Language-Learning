@@ -1,0 +1,41 @@
+
+
+<% if @learning_path_id.nil? %>
+<% card = Translation.all.sample %>
+<% else  %>
+<% card = Translation.where(learning_path_id: @learning_path_id).sample %>
+<% end %>
+<% phrase = Expression.find(card.expression_in_target_language_id) %>
+<% correct_translation = Expression.find(card.expression_in_base_language_id) %>
+<% translations = Array.new %>
+<% translations.push(correct_translation) %>
+<% 4.times do %>
+<% incorrect_translation = Expression.all.sample %>
+<% translations.push(incorrect_translation) %>
+<% end %>
+
+
+<!-- bootstrap this -->
+<div>
+<div>
+Translate the phrase: 
+</div>
+<div id = "the_phrase" value = <%= phrase.id %>>
+<%= phrase.body %>
+
+</div> 
+</div>
+
+<%= link_to "show_quiz_results", remote: true do %>
+<input type="hidden" id="correct_translation" value="<%= correct_translation.body %>">
+<input type="hidden" id="phrase_untranslated" value="<%= phrase.body %>">
+<button id = "flip-button"> Flip </button>
+<% end %>
+
+
+
+<%= link_to flashcards_show_quiz_results_path do %>
+</button>
+Next
+</button>
+<% end %>

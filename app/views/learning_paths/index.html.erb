@@ -13,7 +13,9 @@
       Add a new learning path
     </h2>
 
-    <%= form_with(url: "/insert_learning_path", method: :post) do |form| %>
+
+
+    <%= form_with(url: "/insert_learning_path", method: :post, id: "form_container") do |form| %>
   
   <div>
   <div>
@@ -34,6 +36,7 @@
         <%end %>
         </select> 
       </div>
+    
 
       <div>
         <label for="target_language_id_box">
@@ -50,11 +53,14 @@
     <%= form.label :file, 'Choose a file' %>
     <%= form.file_field :file, accept: '.srt, .txt' %>
   </div>
+    
 
       <div class="actions">
         <%= form.submit 'Create learning path' %>
       </div>
+    
     <% end %>
+    
   </div>
 </div>
 
@@ -93,6 +99,8 @@
 
         <th>
         </th>
+        <th>
+        </th>
       </tr>
 
       <% LearningPath.where(:user_id => current_user.id).order(:created_at => :desc).all.each do |a_learning_path| %>
@@ -127,6 +135,9 @@
           <a href="/learning_paths/<%= a_learning_path.id %>">
             Show details
           </a>
+        </td>
+        <td>
+<%= link_to("New Session", flashcards_question_path(learning_path_id: a_learning_path.id)) %>
         </td>
       </tr>
       <% end %>

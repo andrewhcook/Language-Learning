@@ -1,7 +1,7 @@
 class FlashcardsController < ApplicationController
   
   def show_question_card
-
+    @learning_path_id = params.fetch("learning_path_id", nil)
     render({template: 'flashcards/question_card'})
   end
 
@@ -15,5 +15,21 @@ class FlashcardsController < ApplicationController
     render({template: 'flashcards/result_card'})
   end
 
+  def show_quiz_card
+    @learning_path_id = params.fetch("learning_path_id", nil)
+    render({template: 'flashcards/quiz_card'})    
+  end
+
+  def show_quiz_results
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_url }
+      format.json { head :no_content }
+      
+      format.js do
+        render template: "flashcards/show_results"
+      end
+    end
+
+  end
 
 end

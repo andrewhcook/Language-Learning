@@ -69,4 +69,5 @@ class LearningPathsController < ApplicationController
 
     redirect_to('/learning_paths', { notice: 'Learning path deleted successfully.' })
   end
+
 end
