@@ -70,4 +70,8 @@ class LearningPathsController < ApplicationController
     redirect_to('/learning_paths', { notice: 'Learning path deleted successfully.' })
   end
 
+  def show_instructions
+    render('/learning_paths/instructions')
+  end
+
 end

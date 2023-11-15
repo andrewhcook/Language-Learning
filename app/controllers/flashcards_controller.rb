@@ -1,7 +1,8 @@
 class FlashcardsController < ApplicationController
   
   def show_question_card
-    @learning_path_id = params.fetch("learning_path_id", nil)
+    fallback = LearningPath.where(:user_id => current_user.id).all.sample.id
+    @learning_path_id = params.fetch("learning_path_id", fallback)
     render({template: 'flashcards/question_card'})
   end
 
@@ -16,7 +17,8 @@ class FlashcardsController < ApplicationController
   end
 
   def show_quiz_card
-    @learning_path_id = params.fetch("learning_path_id", nil)
+    fallback = LearningPath.where(:user_id => current_user.id).all.sample.id
+    @learning_path_id = params.fetch("learning_path_id", fallback)
     render({template: 'flashcards/quiz_card'})    
   end
 

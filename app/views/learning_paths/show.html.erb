@@ -1,4 +1,4 @@
-<div>
+<div class="container mt-4">
   <div>
     <h1>
       Learning path #<%= @the_learning_path.id %> details
@@ -6,82 +6,46 @@
 
     <div>
       <div>
-        <a href="/learning_paths">
+        <a href="/learning_paths" class="btn btn-secondary">
           Go back
         </a>
       </div>
 
-     <div>
-     <div>
-     <% user_id = current_user.id %>
-<% learning_id = LearningPath.find_by(user_id: user_id).id %>
-<table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Expression in base language
-        </th>
-
-        <th>
-          Expression in target language
-        </th>
-
-        <th>
-          Learning path
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-<% list_of_translations = Translation.where(:learning_path_id => @the_learning_path.id).all %>
-      <% list_of_translations.each do |a_translation| %>
-      <tr>
-        <td>
-          <%= a_translation.id %>
-        </td>
-
-        <td>
-          <%= Expression.find(a_translation.expression_in_base_language_id).body %>
-        </td>
-
-        <td>
-          <%= Expression.find(a_translation.expression_in_target_language_id).body %>
-        </td>
-
-        <td>
-          <%= a_translation.learning_path_id %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_translation.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_translation.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/translations/<%= a_translation.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-
-     </div>
-     </div>
-</div>
-</div>
+      <div class="mt-4">
+        <% user_id = current_user.id %>
+        <% learning_id = LearningPath.find_by(user_id: user_id).id %>
+        <table class="table table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th>ID</th>
+              <th>Expression in base language</th>
+              <th>Expression in target language</th>
+              <th>Learning path</th>
+              <th>Created at</th>
+              <th>Updated at</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% list_of_translations = Translation.where(:learning_path_id => @the_learning_path.id).all %>
+            <% list_of_translations.each do |a_translation| %>
+              <tr>
+                <td><%= a_translation.id %></td>
+                <td><%= Expression.find(a_translation.expression_in_base_language_id).body %></td>
+                <td><%= Expression.find(a_translation.expression_in_target_language_id).body %></td>
+                <td><%= a_translation.learning_path_id %></td>
+                <td><%= time_ago_in_words(a_translation.created_at) %> ago</td>
+                <td><%= time_ago_in_words(a_translation.updated_at) %> ago</td>
+                <td>
+                  <a href="/translations/<%= a_translation.id %>" class="btn btn-info">
+                    Show details
+                  </a>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

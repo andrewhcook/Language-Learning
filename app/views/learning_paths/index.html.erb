@@ -1,148 +1,100 @@
 
-<div>
-  <h1>
-    List of all learning paths
-  </h1>
-</div>
-
-<hr>
-
-<div>
+<div class="container mt-4">
   <div>
-    <h2>
-      Add a new learning path
-    </h2>
+    <h1>List of all learning paths</h1>
+  </div>
 
+  <hr>
 
-
-    <%= form_with(url: "/insert_learning_path", method: :post, id: "form_container") do |form| %>
-  
   <div>
-  <div>
-  <label for = "title_box">
-  Title
-  </label>
-  <%= form.text_field :query_title_box, id: "title_box" %>
-  </div>
-  </div>
-      <div>
-        <label for="base_language_id_box">
-          Base language (The language you are most comfortable with)
-        </label>
-        <select id = "base_language_id_box" name = "base_language_id_query_box"> 
-        <% Language.all.each do |language| %>
-        <% language_name = language.name %>
-        <option value = "<%= language_name %>"> <%= language_name %> </option>
-        <%end %>
-        </select> 
-      </div>
-    
+    <div>
+      <h2>Add a new learning path</h2>
 
-      <div>
-        <label for="target_language_id_box">
-          Target language
-        </label>
-        <select id = "target_language_id_box" name = "target_language_id_query_box"> 
-        <% Language.all.each do |language| %>
-        <% language_name = language.name %>
-        <option value = "<%= language_name %>"> <%= language_name %> </option>
-        <%end %>
-        </select> 
-      </div>
-  <div class="field">
-    <%= form.label :file, 'Choose a file' %>
-    <%= form.file_field :file, accept: '.srt, .txt' %>
-  </div>
-    
+      <%= form_with(url: "/insert_learning_path", method: :post, id: "form_container") do |form| %>
 
-      <div class="actions">
-        <%= form.submit 'Create learning path' %>
-      </div>
-    
-    <% end %>
-    
-  </div>
-</div>
+        <div class="form-group">
+          <label for="title_box">Title</label>
+          <%= form.text_field :query_title_box, id: "title_box", class: "form-control" %>
+        </div>
 
-<hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
+        <div class="form-group">
+          <label for="base_language_id_box">Base language (The language you are most comfortable with)</label>
+          <select id="base_language_id_box" name="base_language_id_query_box" class="form-control">
+            <% Language.all.each do |language| %>
+              <% language_name = language.name %>
+              <option value="<%= language_name %>"> <%= language_name %> </option>
+            <% end %>
+          </select>
+        </div>
 
-      <th>
-      Title
-      </th>
-        <th>
-          ID
-        </th>
+        <div class="form-group">
+          <label for="target_language_id_box">Target language</label>
+          <select id="target_language_id_box" name="target_language_id_query_box" class="form-control">
+            <% Language.all.each do |language| %>
+              <% language_name = language.name %>
+              <option value="<%= language_name %>"> <%= language_name %> </option>
+            <% end %>
+          </select>
+        </div>
 
-        <th>
-          User
-        </th>
+        <div class="form-group">
+          <%= form.label :file, 'Choose a file' %>
+          <%= form.file_field :file, accept: '.srt, .txt', class: "form-control-file" %>
+        </div>
 
-        <th>
-          Base language
-        </th>
+        <div class="form-group">
+          <%= form.submit 'Create learning path', class: "btn btn-primary" %>
+        </div>
 
-        <th>
-          Target language
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-        <th>
-        </th>
-      </tr>
-
-      <% LearningPath.where(:user_id => current_user.id).order(:created_at => :desc).all.each do |a_learning_path| %>
-      <tr>
-      <td>
-      <%= !a_learning_path.title.nil? ? a_learning_path.title : "Untitled" %>
-      </td>
-        <td>
-          <%= a_learning_path.id %>
-        </td>
-
-        <td>
-          <%= a_learning_path.user_id %>
-        </td>
-
-        <td>
-          <%= a_learning_path.base_language_id %>
-        </td>
-
-        <td>
-          <%= a_learning_path.target_language_id %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_learning_path.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_learning_path.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/learning_paths/<%= a_learning_path.id %>">
-            Show details
-          </a>
-        </td>
-        <td>
-<%= link_to("New Session", flashcards_question_path(learning_path_id: a_learning_path.id)) %>
-        </td>
-      </tr>
       <% end %>
-    </table>
-  </div>
-</div>
 
-<hr>
+    </div>
+  </div>
+
+  <hr>
+
+  <div>
+    <div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>ID</th>
+            <th>User</th>
+            <th>Base language</th>
+            <th>Target language</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th></th>
+            <th></th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% LearningPath.where(user_id: current_user.id).order(created_at: :desc).all.each do |a_learning_path| %>
+            <tr>
+              <td><%= !a_learning_path.title.nil? ? a_learning_path.title : "Untitled" %></td>
+              <td><%= a_learning_path.id %></td>
+              <td><%= a_learning_path.user_id %></td>
+              <td><%= a_learning_path.base_language_id %></td>
+              <td><%= a_learning_path.target_language_id %></td>
+              <td><%= time_ago_in_words(a_learning_path.created_at) %> ago</td>
+              <td><%= time_ago_in_words(a_learning_path.updated_at) %> ago</td>
+              <td>
+                <a href="/learning_paths/<%= a_learning_path.id %>">Show details</a>
+              </td>
+              <td>
+                <%= link_to("Multiple Choice Mode", flashcards_question_path(learning_path_id: a_learning_path.id), class: "btn btn-success btn-sm") %>
+              </td>
+              <td>
+                <%= link_to("Translate Mode", flashcards_quiz_path(learning_path_id: a_learning_path.id), class: "btn btn-success btn-sm") %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+</div>
