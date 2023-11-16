@@ -1,4 +1,54 @@
-<%= image_tag("upload.png", alt: "Image Alt Text", style: 'max-width: 1000px; height: auto;') %>
-<%= image_tag "title.png", alt: "Image Alt Text", style: 'max-width: 1000px; height: auto;'%>
-<%= image_tag "language.png", alt: "Image Alt Text",  style: 'max-width: 1000px; height: auto;' %>
-<%= image_tag "create.png", alt: "Image Alt Text",  style: 'max-width: 1000px; height: auto;'%>
+<button id = "previous" onClick = "fnPrevious()"> Previous </button>
+<button id = "next" onClick = "fnNext()"> Next </button>
+
+<div type = "hidden" id = "counter"> 2 </div>
+<%= image_tag("upload.png", alt: "Image Alt Text", style: 'max-width: 1000px; height: auto;', id: "first") %>
+<%= image_tag "title.png", alt: "Image Alt Text", style: 'max-width: 1000px; height: auto;', id: "second", class: "hidden-image"%>
+<%= image_tag "language.png", alt: "Image Alt Text",  style: 'max-width: 1000px; height: auto;', id: "third", class: "hidden-image"%>
+<%= image_tag "create.png", alt: "Image Alt Text",  style: 'max-width: 1000px; height: auto;', id: "fourth", class: "hidden-image"%>
+
+
+<script>
+function fnNext() {
+  count = $("#counter").text()
+  console.log(count)
+  if (count < 4) {
+  $("#counter").text(parseInt(count) + 1);
+  }
+  display();
+}
+
+function fnPrevious() {
+count = $("#counter").text();
+console.log(count)
+if (count > 1) {
+$("#counter").text(parseInt(count) - 1);
+}
+display();
+}
+function display() {
+$("img").hide()
+count = parseInt($("#counter").text());
+  if (count === 1) {
+    $("#first").show()
+  } else if (count ===2) {
+    $("#second").show()
+  } else if (count ===3){
+    $("#third").show()
+  } else if (count ===4) {
+    $("#fourth").show()
+  } else {
+    $("#counter").text(1)
+    
+  }
+}
+</script>
+
+<style>
+#counter {
+  display: none
+}
+.hidden-image {
+  display: none
+}
+</style>
