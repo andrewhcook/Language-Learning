@@ -85,6 +85,6 @@ test:
 #
 production:
   <<: *default
-  database: rails_template_production
-  username: rails_template
+  database: Language-Learning-0.1 
+  username: Language-Learning-0.1 
   password: ""
