@@ -4,7 +4,6 @@ class ParseFileToDatabaseJob < ApplicationJob
   def perform(the_learning_path, original_filename)
     # Do something later
 
-      
       sample_file = ActionDispatch::Http::UploadedFile.new(
         tempfile: Rails.root.join('public', 'uploads',
                                   original_filename).open, filename: original_filename, type: 'text/plain'
@@ -30,8 +29,8 @@ class ParseFileToDatabaseJob < ApplicationJob
             the_expression.body = a_line.strip
             the_expression.save
             # add translation queries
-            api_url = 'http://localhost:5000/translate'
-            
+            api_url = ENV["api_url"]
+           #api_url = "http://localhost:5000/translate"
             next unless Translation.where(:learning_path_id => the_learning_path.id).where(expression_in_target_language_id: the_expression.id).count == 0
 
             expression_to_translate = the_expression.body
@@ -44,7 +43,9 @@ class ParseFileToDatabaseJob < ApplicationJob
               format: 'text',
               api_key: ''
             }
+
             response = HTTP.post(api_url, json: request_data, headers: { 'Content-Type' => 'application/json' })
+            # response = HTTP.headers('Content-Type' => 'application/json').post(api_url, json: request_data)
             if response.code.to_i == 200
               # Parse the JSON response
               translation = JSON.parse(response.body)
