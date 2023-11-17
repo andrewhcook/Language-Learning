@@ -1,0 +1,120 @@
+<% user_id = current_user.id %>
+
+<div>
+  <div>
+    <h1>
+      List of all translations
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new translation
+    </h2>
+
+    <form action="/insert_translation" method="post">
+      <div>
+        <label for="expression_in_base_language_id_box">
+          Expression in base language
+        </label>
+
+        <input type="text" id="expression_in_base_language_id_box" name="query_expression_in_base_language_id">
+      </div>
+
+      <div>
+        <label for="expression_in_target_language_id_box">
+          Expression in target language
+        </label>
+
+        <input type="text" id="expression_in_target_language_id_box" name="query_expression_in_target_language_id">
+      </div>
+
+      <div>
+        <label for="learning_path_id_box">
+          Learning path
+        </label>
+
+        <input type="text" id="learning_path_id_box" name="query_learning_path_id">
+      </div>
+
+      <button>
+        Create translation
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Expression in base language
+        </th>
+
+        <th>
+          Expression in target language
+        </th>
+
+        <th>
+          Learning path
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+<% list_of_translations = Translations.where(:user_id => user_id).all %>
+      <% list_of_translations.each do |a_translation| %>
+      <tr>
+        <td>
+          <%= a_translation.id %>
+        </td>
+
+        <td>
+          <%= Expression.find(a_translation.expression_in_base_language_id).body %>
+        </td>
+
+        <td>
+          <%= Expression.find(a_translation.expression_in_target_language_id).body %>
+        </td>
+
+        <td>
+          <%= a_translation.learning_path_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_translation.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_translation.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/translations/<%= a_translation.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

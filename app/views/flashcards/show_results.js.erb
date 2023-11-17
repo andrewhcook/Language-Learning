@@ -1,0 +1,12 @@
+
+var answer = $("#correct_translation").val()
+var phrase = $("#phrase_untranslated").val()
+if ($("#the_phrase").text() === answer) {
+  console.log('true')
+  $("#the_phrase").text(phrase)
+
+} else {
+  console.log('false')
+  $("#the_phrase").text(answer)
+}
+//phrase_untranslated

@@ -74,8 +74,11 @@ GEM
     ansispan (0.0.1)
     appdev_support (0.2.1)
       tabulo
+    ast (2.4.2)
     awesome_print (1.9.2)
+    backport (1.2.0)
     bcrypt (3.1.18)
+    benchmark (0.3.0)
     better_errors (2.9.1)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
@@ -130,6 +133,7 @@ GEM
       capybara
       color_namer
       rspec
+    e2mmap (0.1.0)
     erubi (1.12.0)
     faker (3.1.1)
       i18n (>= 1.8.11, < 2)
@@ -173,9 +177,11 @@ GEM
     io-console (0.6.0)
     irb (1.6.4)
       reline (>= 0.3.0)
+    jaro_winkler (1.5.6)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    json (2.6.3)
     kaminari (1.2.2)
       activesupport (>= 4.1.0)
       kaminari-actionview (= 1.2.2)
@@ -188,6 +194,11 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    kramdown (2.4.0)
+      rexml
+    kramdown-parser-gfm (1.1.0)
+      kramdown (~> 2.0)
+    language_server-protocol (3.17.0.3)
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
@@ -217,6 +228,8 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
+    nokogiri (1.15.2-arm64-darwin)
+      racc (~> 1.4)
     nokogiri (1.15.2-x86_64-linux)
       racc (~> 1.4)
     octokit (5.6.1)
@@ -224,6 +237,10 @@ GEM
       sawyer (~> 0.9)
     oj (3.13.23)
     orm_adapter (0.5.0)
+    parallel (1.23.0)
+    parser (3.2.2.4)
+      ast (~> 2.4.1)
+      racc
     pg (1.4.6)
     pry (0.14.2)
       coderay (~> 1.1)
@@ -277,11 +294,13 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
+    rainbow (3.1.1)
     rake (13.0.6)
     ransack (4.0.0)
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
+    rbs (2.8.4)
     rchardet (1.8.0)
     redis (4.8.1)
     regexp_parser (2.8.0)
@@ -290,6 +309,8 @@ GEM
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
+    reverse_markdown (2.1.1)
+      nokogiri
     rexml (3.2.5)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
@@ -315,8 +336,22 @@ GEM
       rspec-mocks (~> 3.11)
       rspec-support (~> 3.11)
     rspec-support (3.12.0)
+    rubocop (1.57.2)
+      json (~> 2.3)
+      language_server-protocol (>= 3.17.0)
+      parallel (~> 1.10)
+      parser (>= 3.2.2.4)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.28.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 3.0)
+    rubocop-ast (1.30.0)
+      parser (>= 3.2.1.0)
     ruby-graphviz (1.2.5)
       rexml
+    ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     rufo (0.16.0)
@@ -335,6 +370,22 @@ GEM
       rack (~> 2.2, >= 2.2.4)
       rack-protection (= 3.0.6)
       tilt (~> 2.0)
+    solargraph (0.49.0)
+      backport (~> 1.2)
+      benchmark
+      bundler (~> 2.0)
+      diff-lcs (~> 1.4)
+      e2mmap
+      jaro_winkler (~> 1.5)
+      kramdown (~> 2.3)
+      kramdown-parser-gfm (~> 1.1)
+      parser (~> 3.0)
+      rbs (~> 2.0)
+      reverse_markdown (~> 2.0)
+      rubocop (~> 1.38)
+      thor (~> 1.0)
+      tilt (~> 2.0)
+      yard (~> 0.9, >= 0.9.24)
     specs_to_readme (0.1.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
@@ -343,6 +394,7 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.6.2-arm64-darwin)
     sqlite3 (1.6.2-x86_64-linux)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
@@ -396,9 +448,11 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
+    yard (0.9.34)
     zeitwerk (2.6.7)
 
 PLATFORMS
+  arm64-darwin-22
   x86_64-linux
 
 DEPENDENCIES
@@ -411,6 +465,7 @@ DEPENDENCIES
   capybara
   debug
   devise
+  dotenv (~> 2.8)
   dotenv-rails
   draft_generators
   draft_matchers
@@ -431,6 +486,7 @@ DEPENDENCIES
   rspec-rails (~> 6.0.0)
   rufo
   selenium-webdriver
+  solargraph
   specs_to_readme
   sprockets-rails
   sqlite3 (~> 1.4)
