@@ -85,7 +85,7 @@ test:
 #
 production:
   <<: *default
-   url: <%= ENV['DATABASE_URL'] %>
-  database: Language-Learning-0.1 
-  username: Language-Learning-0.1 
+  url: <%= ENV['DATABASE_URL'] %>
+  database: language_learning_db 
+  username: language-learning-app
   password: ""
