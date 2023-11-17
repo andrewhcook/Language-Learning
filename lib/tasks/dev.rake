@@ -3,7 +3,9 @@ require "net/http"
 require "json"
 desc "Fill the database tables with some sample data"
 task({ :drop_tables => :environment }) do
-  if Rails.env.development?
+  if Rails.env.production?
+    Translation.destroy_all
+    Expression.destroy_all
     LearningPath.destroy_all
     Language.destroy_all
     User.destroy_all
