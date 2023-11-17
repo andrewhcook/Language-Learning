@@ -1,11 +1,11 @@
 databases:
-  - name: Language-Learning-0.1 
-    databaseName: Language-Learning-0.1 
-    user: Language-Learning-0.1 
+  - name: Language-Learning 
+    databaseName: Language-Learning
+    user: Language-Learning
 
 services:
   - type: web
-    name: Language-Learning-0.1 # the name of this service, eg hello-world
+    name: Language-Learning # the name of this service, eg hello-world
     env: ruby # this app is written in ruby
     plan: free # make sure to set this to free or you'll get billed $$$
     buildCommand: "./bin/render-build.sh" # we already created these two files for you
@@ -13,7 +13,7 @@ services:
     envVars: # this section sets some ENV variables needed by Render for deployment
       - key: DATABASE_URL
         fromDatabase:
-          name: Language-Learning-0.1 
+          name: Language-Learning
           property: connectionString
       - key: SECRET_KEY_BASE
         generateValue: true
