@@ -70,7 +70,9 @@ class ParseFileToDatabaseJob < ApplicationJob
               puts response.body
             end
           end
-
+        ensure
+          ActiveRecord::Base.connection_pool.release_connection
+        
         end
           pp "#{Expression.all.length} records created"
           pp "#{counter} lines in movie"
