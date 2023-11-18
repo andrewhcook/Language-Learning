@@ -69,9 +69,9 @@ class ParseFileToDatabaseJob < ApplicationJob
               puts "Error: #{response.code}"
               puts response.body
             end
-          ensure
-            ActiveRecord::Base.connection_pool.release_connection
           end
+        ensure
+          ActiveRecord::Base.connection_pool.release_connection
         
         end
           pp "#{Expression.all.length} records created"
