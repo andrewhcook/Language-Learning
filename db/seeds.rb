@@ -12,13 +12,13 @@ if User.all.length != 0
     user.save
 end
 
-if Language.find_by(:name => "French").first.nil?
+if Language.find_by(:name => "French").nil?
   french = Language.new
   french.name = "French"
   french.shortcode = "fr"
   french.save
 end
-if Language.find_by(:name => "English").first.nil?
+if Language.find_by(:name => "English").nil?
   english = Language.new
   english.name = "English"
   english.shortcode = "en"
