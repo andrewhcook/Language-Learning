@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # Routes for the Expression resource:
   # get("/", {:controller => "homepage", :action => "index"})
 
-  root "learning_paths#index"
+  root "homepage#index"
 
   # file uploader
   post 'upload_file' => 'file_upload#upload'
