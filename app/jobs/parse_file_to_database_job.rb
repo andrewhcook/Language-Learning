@@ -4,11 +4,13 @@ class ParseFileToDatabaseJob < ApplicationJob
 
   def perform(the_learning_path, original_filename)
     # Do something later
+    ActiveRecord::Base.connection_pool.with_connection do
       sample_file = ActionDispatch::Http::UploadedFile.new(
         tempfile: Rails.root.join('public', 'uploads',
                                   original_filename).open, filename: original_filename, type: 'text/plain'
       )
       counter = 0
+
       File.open(sample_file) do |file|
         # pp file
         begin
@@ -88,6 +90,6 @@ class ParseFileToDatabaseJob < ApplicationJob
         end
         pp "#{counter} lines in movie"
       end
-    
+    end
   end
 end
