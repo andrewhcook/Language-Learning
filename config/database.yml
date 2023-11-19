@@ -22,4 +22,5 @@ test:
 production:
   <<: *default
   database: <%= ENV['DATABASE_NAME'] %>
-  
+  sslmode: required
+  sslminsize: 512
