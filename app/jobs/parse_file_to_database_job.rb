@@ -68,12 +68,12 @@ class ParseFileToDatabaseJob < ApplicationJob
                   puts "Error: #{response.code}"
                   puts response.body
                 end
-              rescue PG::ConnectionBad => e
-                Rails.logger.error("PG::ConnectionBad: #{e.message}")
-                retry_count += 1
-                retry if retry_count < MAX_RETRIES
               end
-              end
+            rescue PG::ConnectionBad => e
+              Rails.logger.error("PG::ConnectionBad: #{e.message}")
+              retry_count += 1
+              retry if retry_count < MAX_RETRIES
+            end
           end
         rescue StandardError => e
           Rails.logger.error("Error processing file: #{e.message}")
