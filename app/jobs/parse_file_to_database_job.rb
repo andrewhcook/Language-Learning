@@ -1,18 +1,22 @@
 class ParseFileToDatabaseJob < ApplicationJob
   queue_as :default
+  MAX_RETRIES = 3
 
   def perform(the_learning_path, original_filename)
     # Do something later
-
+    ActiveRecord::Base.connection_pool.with_connection do
       sample_file = ActionDispatch::Http::UploadedFile.new(
         tempfile: Rails.root.join('public', 'uploads',
                                   original_filename).open, filename: original_filename, type: 'text/plain'
       )
       counter = 0
+
       File.open(sample_file) do |file|
         # pp file
         begin
           file.each do |line|
+            retry_count = 0
+            begin
             #  pp line
             next unless line.valid_encoding?
             next if line.at(0) =~ /\d/ || line.strip.empty?
@@ -71,13 +75,21 @@ class ParseFileToDatabaseJob < ApplicationJob
                 puts response.body
               end
             end
+          rescue PG::ConnectionBad => e
+            Rails.logger.error("PG::ConnectionBad: #{e.message}")
+            if retry_count < MAX_RETRIES
+              retry_count += 1
+              retry
           end
+          else
+            Rails.logger.error("Maximum retries reached. Unable to recover from PG::ConnectionBad.")
+          end
+        end
         ensure
           ActiveRecord::Base.connection_pool.release_connection
         end
-        pp "#{Expression.all.length} records created"
         pp "#{counter} lines in movie"
       end
-    
+    end
   end
 end
