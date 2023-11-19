@@ -21,6 +21,7 @@ test:
 
 production:
   <<: *default
+  url: <%= ENV[DATABASE_URL] %>
   database: language_learning_db 
   username: language_learning_user
   password: <%= ENV['DATABASE_PASSWORD'] %>
