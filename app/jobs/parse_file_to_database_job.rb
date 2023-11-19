@@ -3,18 +3,18 @@ class ParseFileToDatabaseJob < ApplicationJob
   MAX_RETRIES = 3
 
   def perform(the_learning_path, original_filename)
-    ActiveRecord::Base.connection_pool.with_connection do
-      sample_file = ActionDispatch::Http::UploadedFile.new(
-        tempfile: Rails.root.join('public', 'uploads', original_filename).open,
-        filename: original_filename,
-        type: 'text/plain'
+    sample_file = ActionDispatch::Http::UploadedFile.new(
+      tempfile: Rails.root.join('public', 'uploads', original_filename).open,
+      filename: original_filename,
+      type: 'text/plain'
       )
-
+      
       counter = 0
-
+      
       File.open(sample_file) do |file|
         begin
           file.each do |line|
+            ActiveRecord::Base.connection_pool.with_connection do
             retry_count = 0
             begin
               next unless line.valid_encoding?
@@ -74,11 +74,11 @@ class ParseFileToDatabaseJob < ApplicationJob
               retry_count += 1
               retry if retry_count < MAX_RETRIES
             end
+          rescue StandardError => e
+            Rails.logger.error("Error processing file: #{e.message}")
+          ensure
+            ActiveRecord::Base.connection_pool.release_connection
           end
-        rescue StandardError => e
-          Rails.logger.error("Error processing file: #{e.message}")
-        ensure
-          ActiveRecord::Base.connection_pool.release_connection
         end
 
         pp "#{counter} lines in movie"
