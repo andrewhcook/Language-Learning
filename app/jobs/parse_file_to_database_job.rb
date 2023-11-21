@@ -1,7 +1,11 @@
 class ParseFileToDatabaseJob < ApplicationJob
   queue_as :default
   MAX_RETRIES = 3
-
+#create learning path and logic would go with file learning_path_injest_file
+#learning.injest_file
+#one line here
+#logic lives in model
+#move to a concern
   def perform(the_learning_path, original_filename)
     # Do something later
     ActiveRecord::Base.connection_pool.with_connection do
