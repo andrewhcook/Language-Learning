@@ -59,7 +59,7 @@ class ParseFileToDatabaseJob < ApplicationJob
                 # Parse the JSON response
                 translation = JSON.parse(response.body)
                 translated_expression = translation['translatedText']
-                puts "Translation: #{translated_expression}"
+               # puts "Translation: #{translated_expression}"
 
                 new_expression = Expression.new
                 new_expression.body = translated_expression
