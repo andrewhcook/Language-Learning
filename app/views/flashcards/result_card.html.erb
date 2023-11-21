@@ -11,5 +11,5 @@
     <strong>You answered this card:</strong> <%= @result ? "Correct" : "Incorrect" %>
   </div>
 
-  <%= link_to("Next", flashcards_question_path, {:class => "btn btn-primary"}) %>
+  <%= link_to("Next", flashcards_question_path(learning_path_id: @learning_path_id), {:class => "btn btn-primary"}) %>
 </div>

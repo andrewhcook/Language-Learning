@@ -34,7 +34,7 @@
     <button id="flip-button" class="btn btn-primary mt-3">Flip</button>
   <% end %>
 
-  <%= link_to flashcards_show_quiz_results_path, class: "btn btn-success mt-3" do %>
+  <%= link_to flashcards_show_quiz_results_path(learning_path_id:@learning_path_id), class: "btn btn-success mt-3" do %>
     Next
   <% end %>
 </div>
