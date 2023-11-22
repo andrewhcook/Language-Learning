@@ -12,7 +12,9 @@ class FlashcardsController < ApplicationController
     second = params.fetch("selected_translation")
 
     @result = !Translation.where(expression_in_target_language_id: @first).where(expression_in_base_language_id: second).first.nil?
-
+    if !@result 
+      Translation.where(learning_path_id: @learning_path_id).where(expression_in_target_language_id: @first).first.review_status = 0
+    end
     render({template: 'flashcards/result_card'})
   end
 
