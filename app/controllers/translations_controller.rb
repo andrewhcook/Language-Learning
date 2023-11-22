@@ -55,4 +55,13 @@ class TranslationsController < ApplicationController
 
     redirect_to("/translations", { :notice => "Translation deleted successfully."} )
   end
+
+  def update_status
+    matching_translations = Translation.where({ :id => params["id"] })
+    the_translation = matching_translations.at(0)
+    the_translation.review_status = params["review_status"].to_i
+    the_translation.save
+    redirect_back(fallback_location: "/flashcards/quiz")
+  end
+
 end

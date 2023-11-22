@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_07_223230) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_22_162933) do
   create_table "expressions", force: :cascade do |t|
     t.string "body"
     t.integer "language_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_07_223230) do
     t.integer "learning_path_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "review_status", default: 0
   end
 
   create_table "users", force: :cascade do |t|

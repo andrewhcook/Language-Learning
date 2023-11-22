@@ -87,6 +87,8 @@ Rails.application.routes.draw do
   get("flashcards/question", {:controller => "flashcards", :action => "show_question_card"})
   get("flashcards/quiz", {:controller => "flashcards", :action => "show_quiz_card"})
   get("flashcards/show_quiz_results", {:controller => "flashcards", :action => "show_quiz_results"})
+  
+  post "/translations/:id/update_status", { :controller => "translations", :action => "update_status" }
   devise_for :users
  
   
