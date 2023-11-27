@@ -3,7 +3,7 @@
 # Table name: translations
 #
 #  id                               :integer          not null, primary key
-#  review_status                    :integer          default("Need to Review")
+#  review_status                    :integer          default("Wouldn't mind reviewing")
 #  created_at                       :datetime         not null
 #  updated_at                       :datetime         not null
 #  expression_in_base_language_id   :integer

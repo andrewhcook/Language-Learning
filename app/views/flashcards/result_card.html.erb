@@ -10,6 +10,18 @@
   <div class="alert <%= @result ? 'alert-success' : 'alert-danger' %>">
     <strong>You answered this card:</strong> <%= @result ? "Correct" : "Incorrect" %>
   </div>
-
+<% card = Translation.where(expression_in_target_language_id: @first).first %>
+    <form action="/translations/<%= card.id %>/update_status" method="post">
+  <input type="hidden" name="_method" value="post">
+  
+  <label for="review_status">Review Status:</label>
+  <select id="review_status" name="review_status">
+    <option value="0">Need to Review</option>
+    <option value="1">Wouldn't mind reviewing</option>
+    <option value="2">Don't want to see again</option>
+  </select>
+  
+  <button type="submit">Update Status</button>
+</form>
   <%= link_to("Next", flashcards_question_path(learning_path_id: @learning_path_id), {:class => "btn btn-primary"}) %>
 </div>

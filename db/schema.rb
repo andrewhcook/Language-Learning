@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_22_162933) do
     t.integer "learning_path_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "review_status", default: 0
+    t.integer "review_status", default: 1
   end
 
   create_table "users", force: :cascade do |t|
