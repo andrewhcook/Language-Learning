@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # Routes for the Expression resource:
-  # get("/", {:controller => "homepage", :action => "index"})
+  
 
   root "homepage#index"
 
@@ -64,7 +64,7 @@ Rails.application.routes.draw do
   post("/modify_learning_path/:path_id", { :controller => "learning_paths", :action => "update" })
   
   # DELETE
-  get("/delete_learning_path/:path_id", { :controller => "learning_paths", :action => "destroy" })
+  delete("/delete_learning_path/:path_id", { :controller => "learning_paths", :action => "destroy" })
 
   #------------------------------
 
