@@ -61,7 +61,13 @@ class TranslationsController < ApplicationController
     the_translation = matching_translations.at(0)
     the_translation.review_status = params["review_status"].to_i
     the_translation.save
-    redirect_back(fallback_location: "/flashcards/quiz")
+    #redirect_back(fallback_location: "/flashcards/quiz")
+  end
+
+  def need_review_show
+
+    render({:template => "translations/need_to_review"})
+
   end
 
 end

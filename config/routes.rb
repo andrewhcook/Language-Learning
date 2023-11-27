@@ -30,8 +30,11 @@ Rails.application.routes.draw do
           
   # READ
   get("/translations", { :controller => "translations", :action => "index" })
+  get("/translations/needs_review", {:controller => "translations", :action =>"need_review_show"})
   
   get("/translations/:path_id", { :controller => "translations", :action => "show" })
+  
+  post "/translations/:id/update_status", { :controller => "translations", :action => "update_status" }
   
   # UPDATE
   
@@ -87,8 +90,6 @@ Rails.application.routes.draw do
   get("flashcards/question", {:controller => "flashcards", :action => "show_question_card"})
   get("flashcards/quiz", {:controller => "flashcards", :action => "show_quiz_card"})
   get("flashcards/show_quiz_results", {:controller => "flashcards", :action => "show_quiz_results"})
-  
-  post "/translations/:id/update_status", { :controller => "translations", :action => "update_status" }
   devise_for :users
  
   

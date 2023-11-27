@@ -4,6 +4,13 @@
       Learning path #<%= @the_learning_path.id %> details
     </h1>
 
+    <div class="text-center mt-4">
+      <a href="/delete_learning_path/<%= @the_learning_path.id %>" class="btn btn-danger" data-method="delete">
+        Delete this learning path
+      </a>
+    </div>
+
+
     <div>
       <div>
         <a href="/learning_paths" class="btn btn-secondary">
