@@ -1,7 +1,7 @@
 class ParseFileToDatabaseJob < ApplicationJob
   queue_as :default
-
-  MAX_RETRIES = 3
+  MAX_RETRIES = 10
+  retry_on HTTP::ConnectionError, wait: :exponentially_longer, attempts: MAX_RETRIES
 
   def perform(the_learning_path, original_filename)
     ActiveRecord::Base.connection_pool.with_connection do
@@ -11,12 +11,12 @@ class ParseFileToDatabaseJob < ApplicationJob
         type: 'text/plain'
       )
       counter = 0
-
+      checkpoint ||= 0
       File.open(sample_file) do |file|
         begin
           file.each do |line|
             next unless line.valid_encoding?
-            next if line.at(0) =~ /\d/ || line.strip.empty?
+            next if line.at(0) =~ /\d/ || line.strip.empty? || counter <= checkpoint
 
             line.split(/!.?/).each do |a_line|
               counter += 1
@@ -53,6 +53,7 @@ class ParseFileToDatabaseJob < ApplicationJob
               response = HTTP.post(api_url, json: request_data, headers: { 'Content-Type' => 'application/json' })
 
               if response.code.to_i == 200
+                checkpoint += 1
                 translation = JSON.parse(response.body)
                 translated_expression = translation['translatedText']
 
