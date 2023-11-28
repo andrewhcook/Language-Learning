@@ -5,9 +5,13 @@
     </h1>
 
     <div class="text-center mt-4">
-      <a href="/delete_learning_path/<%= @the_learning_path.id %>" class="btn btn-danger" data-method="delete">
+ <%= link_to 'Delete this learning path', "/delete_learning_path/#{@the_learning_path.id}", class: "btn btn-danger", method: :delete, data:  { controller: 'delete-confirmation', action: 'click->delete-confirmation#confirmDelete' } %>
+
+
+     <!-- <a href= class="btn btn-danger" data-method="delete">
         Delete this learning path
-      </a>
+      </a> 
+      -->
     </div>
 
 
@@ -24,12 +28,9 @@
         <table class="table table-bordered">
           <thead class="thead-dark">
             <tr>
-              <th>ID</th>
+            <th>id</th>
               <th>Expression in base language</th>
               <th>Expression in target language</th>
-              <th>Learning path</th>
-              <th>Created at</th>
-              <th>Updated at</th>
               <th></th>
             </tr>
           </thead>
@@ -37,12 +38,9 @@
             <% list_of_translations = Translation.where(:learning_path_id => @the_learning_path.id).all %>
             <% list_of_translations.each do |a_translation| %>
               <tr>
-                <td><%= a_translation.id %></td>
+              <td> <%= a_translation.id %> </td>
                 <td><%= Expression.find(a_translation.expression_in_base_language_id).body %></td>
                 <td><%= Expression.find(a_translation.expression_in_target_language_id).body %></td>
-                <td><%= a_translation.learning_path_id %></td>
-                <td><%= time_ago_in_words(a_translation.created_at) %> ago</td>
-                <td><%= time_ago_in_words(a_translation.updated_at) %> ago</td>
                 <td>
                   <a href="/translations/<%= a_translation.id %>" class="btn btn-info">
                     Show details

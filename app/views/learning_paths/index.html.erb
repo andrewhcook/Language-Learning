@@ -65,12 +65,8 @@
         <thead>
           <tr>
             <th>Title</th>
-            <th>ID</th>
-            <th>User</th>
             <th>Base language</th>
             <th>Target language</th>
-            <th>Created at</th>
-            <th>Updated at</th>
             <th></th>
             <th></th>
             <th> </th>
@@ -80,12 +76,8 @@
           <% LearningPath.where(user_id: current_user.id).order(created_at: :desc).all.each do |a_learning_path| %>
             <tr>
               <td><%= !a_learning_path.title.nil? ? a_learning_path.title : "Untitled" %></td>
-              <td><%= a_learning_path.id %></td>
-              <td><%= a_learning_path.user_id %></td>
-              <td><%= a_learning_path.base_language_id %></td>
-              <td><%= a_learning_path.target_language_id %></td>
-              <td><%= time_ago_in_words(a_learning_path.created_at) %> ago</td>
-              <td><%= time_ago_in_words(a_learning_path.updated_at) %> ago</td>
+              <td><%= Language.find(a_learning_path.base_language_id).name %></td>
+              <td><%= Language.find(a_learning_path.target_language_id).name %></td>
               <td>
                 <a href="/learning_paths/<%= a_learning_path.id %>">Show details</a>
               </td>
