@@ -6,7 +6,7 @@
 
     <div>
       <div>
-        <a href="/translations">
+        <a href="needs_review">
           Go back
         </a>
       </div>
@@ -23,79 +23,33 @@
         Expression in base language
       </dt>
       <dd>
-        <%= @the_translation.expression_in_base_language_id %>
+        <%= Expression.find(@the_translation.expression_in_base_language_id).body %>
       </dd>
 
       <dt>
         Expression in target language
       </dt>
       <dd>
-        <%= @the_translation.expression_in_target_language_id %>
+        <%= Expression.find(@the_translation.expression_in_target_language_id).body %>
       </dd>
 
-      <dt>
-        Learning path
-      </dt>
-      <dd>
-        <%= @the_translation.learning_path_id %>
-      </dd>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_translation.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_translation.updated_at) %> ago
-      </dd>
+      
     </dl>
+
+ <form action="/translations/<%= @the_translation.id %>/update_status" method="post">
+  <input type="hidden" name="_method" value="post">
+  
+  <label for="review_status">Review Status:</label>
+  <select id="review_status" name="review_status">
+    <option value="0">Need to Review</option>
+    <option value="1">Wouldn't mind reviewing</option>
+    <option value="2">Don't want to see again</option>
+  </select>
+  
+  <button type="submit">Update Status</button>
+</form>
+
+
   </div>
 </div>
-
-<hr>
-
-
-<div>
-  <div>
-    <h2>
-      Edit translation
-    </h2>
-
-    <form action="/modify_translation/<%= @the_translation.id %>"  method="post" >
-      <div>
-        <label for="expression_in_base_language_id_box">
-          Expression in base language
-        </label>
-
-        <input type="text" id="expression_in_base_language_id_box" name="query_expression_in_base_language_id" value="<%= @the_translation.expression_in_base_language_id %>">
-      </div>
-
-      <div>
-        <label for="expression_in_target_language_id_box">
-          Expression in target language
-        </label>
-
-        <input type="text" id="expression_in_target_language_id_box" name="query_expression_in_target_language_id" value="<%= @the_translation.expression_in_target_language_id %>">
-      </div>
-
-      <div>
-        <label for="learning_path_id_box">
-          Learning path
-        </label>
-
-        <input type="text" id="learning_path_id_box" name="query_learning_path_id" value="<%= @the_translation.learning_path_id %>">
-      </div>
-
-      <button>
-        Update translation
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>
