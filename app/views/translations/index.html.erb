@@ -80,7 +80,7 @@
         <th>
         </th>
       </tr>
-<% list_of_translations = Translation.where(:user_id => user_id).all %>
+<% list_of_translations = Translation.where({ :learning_path_id => list_of_user_learning_paths.pluck(:id), :review_status => 0 }) %>
       <% list_of_translations.each do |a_translation| %>
       <tr>
         <td>
