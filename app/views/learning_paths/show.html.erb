@@ -32,6 +32,7 @@
               <th>Expression in base language</th>
               <th>Expression in target language</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -45,6 +46,20 @@
                   <a href="/translations/<%= a_translation.id %>" class="btn btn-info">
                     Show details
                   </a>
+                </td>
+                <td>
+                 <form action="/translations/<%= a_translation.id %>/update_status" method="post">
+  <input type="hidden" name="_method" value="post">
+  
+  <label for="review_status">Review Status:</label>
+  <select id="review_status" name="review_status">
+    <option value="0">Need to Review</option>
+    <option value="1">Wouldn't mind reviewing</option>
+    <option value="2">Don't want to see again</option>
+  </select>
+  
+  <button type="submit">Update Status</button>
+</form>
                 </td>
               </tr>
             <% end %>
