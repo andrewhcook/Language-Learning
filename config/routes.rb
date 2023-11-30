@@ -6,44 +6,15 @@ Rails.application.routes.draw do
 
   # file uploader
   post 'upload_file' => 'file_upload#upload'
-  # CREATE
-  post("/insert_expression", { :controller => "expressions", :action => "create" })
           
-  # READ
-  get("/expressions", { :controller => "expressions", :action => "index" })
-  
-  get("/expressions/:path_id", { :controller => "expressions", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_expression/:path_id", { :controller => "expressions", :action => "update" })
-  
-  # DELETE
-  get("/delete_expression/:path_id", { :controller => "expressions", :action => "destroy" })
-
-  #------------------------------
-
-  # Routes for the Translation resource:
-
-  # CREATE
-  post("/insert_translation", { :controller => "translations", :action => "create" })
-          
-  # READ
   get("/translations", { :controller => "translations", :action => "index" })
   get("/translations/needs_review", {:controller => "translations", :action =>"need_review_show"})
   
   get("/translations/:path_id", { :controller => "translations", :action => "show" })
   
   post "/translations/:id/update_status", { :controller => "translations", :action => "update_status" }
-  
-  # UPDATE
-  
-  post("/modify_translation/:path_id", { :controller => "translations", :action => "update" })
-  
-  # DELETE
-  get("/delete_translation/:path_id", { :controller => "translations", :action => "destroy" })
 
-  #------------------------------
+  get("/delete_translation/:path_id", { :controller => "translations", :action => "destroy" })
 
   # Routes for the Learning path resource:
 
@@ -66,26 +37,7 @@ Rails.application.routes.draw do
   # DELETE
   delete("/delete_learning_path/:path_id", { :controller => "learning_paths", :action => "destroy" })
 
-  #------------------------------
-
-  # Routes for the Language resource:
-
-  # CREATE
-  post("/insert_language", { :controller => "languages", :action => "create" })
-          
-  # READ
-  get("/languages", { :controller => "languages", :action => "index" })
-  
-  get("/languages/:path_id", { :controller => "languages", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_language/:path_id", { :controller => "languages", :action => "update" })
-  
-  # DELETE
-  get("/delete_language/:path_id", { :controller => "languages", :action => "destroy" })
-
-  #------------------------------
+  # Routes for Flashcards
   post("flashcards/result", {:controller => "flashcards", :action => "show_results"})
   get("flashcards/question", {:controller => "flashcards", :action => "show_question_card"})
   get("flashcards/quiz", {:controller => "flashcards", :action => "show_quiz_card"})
