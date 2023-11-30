@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   
   post "/translations/:id/update_status", { :controller => "translations", :action => "update_status" }
 
-  get("/delete_translation/:path_id", { :controller => "translations", :action => "destroy" })
-
   # Routes for the Learning path resource:
 
   # CREATE
@@ -30,9 +28,6 @@ Rails.application.routes.draw do
   
   get("/learning_paths/:path_id", { :controller => "learning_paths", :action => "show" })
   
-  # UPDATE
-  
-  post("/modify_learning_path/:path_id", { :controller => "learning_paths", :action => "update" })
   
   # DELETE
   delete("/delete_learning_path/:path_id", { :controller => "learning_paths", :action => "destroy" })
