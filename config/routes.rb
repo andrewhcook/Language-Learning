@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   
   
   # DELETE
-  delete("/delete_learning_path/:path_id", { :controller => "learning_paths", :action => "destroy" })
+  get("/delete_learning_path/:path_id", { :controller => "learning_paths", :action => "destroy" })
 
   # Routes for Flashcards
   post("flashcards/result", {:controller => "flashcards", :action => "show_results"})

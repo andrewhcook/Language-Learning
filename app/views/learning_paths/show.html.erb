@@ -5,7 +5,7 @@
     </h1>
 
     <div class="text-center mt-4">
-  <%= link_to 'Delete this learning path', "/delete_learning_path/#{@the_learning_path.id}", class: "btn btn-danger", method: "delete", data:  { controller: 'delete-confirmation', action: 'click->delete-confirmation#confirmDelete' } %>
+  <%= link_to 'Delete this learning path', "/delete_learning_path/#{@the_learning_path.id}", class: "btn btn-danger", method: :get, data:  { controller: 'delete-confirmation', action: 'click->delete-confirmation#confirmDelete' } %>
 
 
  <!--     <a href="/delete_learning_path/#{@the_learning_path.id}" class="btn btn-danger" data-method="delete">
