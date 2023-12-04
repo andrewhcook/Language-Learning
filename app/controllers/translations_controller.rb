@@ -70,4 +70,8 @@ class TranslationsController < ApplicationController
 
   end
 
+  def to_see_again
+    render({:template => "translations/to_see_again"})
+  end
+
 end
