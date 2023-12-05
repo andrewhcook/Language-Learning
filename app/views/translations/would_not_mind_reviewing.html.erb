@@ -20,7 +20,7 @@
       </thead>
       <tbody>
         <% list_of_user_learning_paths = LearningPath.where({ :user_id => user_id }) %>
-        <% list_of_translations = Translation.where({ :learning_path_id => list_of_user_learning_paths.pluck(:id), :review_status => 0 }) %>
+        <% list_of_translations = Translation.where({ :learning_path_id => list_of_user_learning_paths.pluck(:id), :review_status => 1 }) %>
         <% list_of_translations.each do |a_translation| %>
           <tr>
             <td><%= a_translation.id %></td>
