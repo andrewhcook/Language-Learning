@@ -495,7 +495,6 @@ DEPENDENCIES
   ruby-openai
   rufo
   selenium-webdriver
-  simple_form
   solargraph
   specs_to_readme
   sprockets-rails
