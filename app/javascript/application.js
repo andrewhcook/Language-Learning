@@ -6,5 +6,4 @@ import jquery from "jquery";
 window.jQuery = jquery;
 window.$ = jquery;
 import Rails from "@rails/ujs"
-import 'simple_form'
 Rails.start();
