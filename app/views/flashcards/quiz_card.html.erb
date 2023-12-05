@@ -12,7 +12,6 @@
 <% end %>
 
 
-<!-- bootstrap this -->
 <div class="container mt-4">
   <div class="card">
     <div class="card-body">
@@ -24,6 +23,9 @@
       </div>
       <audio id="audioPlayer" controls></audio>
       <button id="playButton" class="btn btn-primary">Play Translation</button>
+    </div>
+    <div>
+    (All played speech is AI generated)
     </div>
   </div>
 </div>
@@ -79,11 +81,11 @@ $(document).ready(function () {
         audioPlayer.src = URL.createObjectURL(blob);
 
         // Ensure playback within a user interaction context
-        document.body.addEventListener('click', function() {
+        
           audioPlayer.play().catch(function(error) {
             console.error('Error playing audio:', error);
           });
-        }, { once: true });
+        
       },
       error: function (error) {
         console.error('Error fetching audio:', error);
