@@ -21,8 +21,8 @@ class LearningPathsController < ApplicationController
     the_learning_path = LearningPath.new
     the_learning_path.title = params.fetch('query_title_box')
     the_learning_path.user_id = current_user.id
-    the_learning_path.base_language_id = Language.find_by(name: params.fetch('base_language_id_query_box')).id
-    the_learning_path.target_language_id = Language.find_by(name: params.fetch('target_language_id_query_box')).id
+    the_learning_path.base_language_id = Language.find( params.fetch('base_language_id_query_box')).id
+    the_learning_path.target_language_id = Language.find(params.fetch('target_language_id_query_box')).id
 
     if the_learning_path.valid?
       the_learning_path.save
