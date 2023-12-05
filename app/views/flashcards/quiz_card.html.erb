@@ -30,11 +30,16 @@
   </div>
 </div>
 
-  <%= link_to "show_quiz_results", remote: true do %>
-    <input type="hidden" id="correct_translation" value="<%= correct_translation.body %>">
-    <input type="hidden" id="phrase_untranslated" value="<%= phrase.body %>">
-    <button id="flip-button" class="btn btn-primary mt-3">Flip</button>
-  <% end %>
+<button class="clickable-div btn btn-primary mt-3" id="showQuizResults">
+  Flip
+  </button>
+ <div id="quizResults" class="mt-3" style="display: none;">
+  <!-- Hidden content goes here -->
+  <input type="hidden" id="correct_translation" value="<%= correct_translation.body %>">
+  <input type="hidden" id="phrase_untranslated" value="<%= phrase.body %>">
+  <button id="flip-button" class="btn btn-success">Flip</button>
+</div>
+
 
   <form action="/translations/<%= card.id %>/update_status" method="post">
   <input type="hidden" name="_method" value="post">
@@ -94,4 +99,20 @@ $(document).ready(function () {
   });
 });
 })
+</script>
+
+<script>
+  // jQuery click event to show/hide the div
+  $(document).ready(function() {
+    $("#showQuizResults").click(function() {
+      var answer = $("#correct_translation").val()
+var phrase = $("#phrase_untranslated").val()
+if ($("#the_phrase").text() === answer) {
+  $("#the_phrase").text(phrase)
+
+} else {
+  $("#the_phrase").text(answer)
+}
+    });
+  });
 </script>
