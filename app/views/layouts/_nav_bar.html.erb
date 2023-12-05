@@ -31,7 +31,6 @@
         </li>
         <% if current_user %>
           <li class="nav-item <%= current_page?(flashcards_quiz_path) ? 'active' : '' %>">
-            <%= link_to("Instructions", learning_paths_instructions_path, class: "nav-link") %>
           </li>
 
         <% end %>

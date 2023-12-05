@@ -1,98 +1,68 @@
+<div class="container mt-3">
+  <a href="translations/needs_review" class="btn btn-primary">View "need to review"</a>
+</div>
 
-<div class = container mt-3> 
+<div class="container mt-5">
+  <h1 class="mb-4">List of all learning paths</h1>
 
-<a href = "translations/needs_review" class  = "btn btn-primary" > View "need to review" </a>
+  <h2 class="mb-3">Add a new learning path</h2>
 
- </div>
+  <%= form_with(url: "/insert_learning_path", method: :post, id: "form_container", local: true, class:"mb-5") do |form| %>
 
-<div class="container mt-4">
-  <div>
-    <h1>List of all learning paths</h1>
-  </div>
+    <div class="form-group">
+      <%= form.label :query_title_box, 'Title', class: "form-label" %>
+      <%= form.text_field :query_title_box, id: "title_box", class: "form-control" %>
+    </div>
 
-  <hr>
+    <div class="form-group">
+      <%= form.label :base_language_id_query_box, 'Base language (The language you are most comfortable with)', class: "form-label" %>
+      <%= form.collection_select :base_language_id_query_box, Language.all, :id, :name, {}, {class: 'form-control'} %>
+    </div>
 
-  <div>
-    <div>
-      <h2>Add a new learning path</h2>
+    <div class="form-group">
+      <%= form.label :target_language_id_query_box, 'Target language', class: "form-label" %>
+      <%= form.collection_select :target_language_id_query_box, Language.all, :id, :name, {}, {class: 'form-control'} %>
+    </div>
 
-      <%= form_with(url: "/insert_learning_path", method: :post, id: "form_container") do |form| %>
+    <div class="form-group">
+      <%= form.label :file, 'Choose a file', class: "form-label" %>
+      <%= form.file_field :file, accept: '.srt, .txt', class: "form-control-file" %>
+    </div>
 
-        <div class="form-group">
-          <label for="title_box">Title</label>
-          <%= form.text_field :query_title_box, id: "title_box", class: "form-control" %>
-        </div>
+    <div class="form-group">
+      <%= form.submit 'Create learning path', class: "btn btn-primary" %>
+    </div>
 
-        <div class="form-group">
-          <label for="base_language_id_box">Base language (The language you are most comfortable with)</label>
-          <select id="base_language_id_box" name="base_language_id_query_box" class="form-control">
-            <% Language.all.each do |language| %>
-              <% language_name = language.name %>
-              <option value="<%= language_name %>"> <%= language_name %> </option>
-            <% end %>
-          </select>
-        </div>
+  <% end %>
 
-        <div class="form-group">
-          <label for="target_language_id_box">Target language</label>
-          <select id="target_language_id_box" name="target_language_id_query_box" class="form-control">
-            <% Language.all.each do |language| %>
-              <% language_name = language.name %>
-              <option value="<%= language_name %>"> <%= language_name %> </option>
-            <% end %>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <%= form.label :file, 'Choose a file' %>
-          <%= form.file_field :file, accept: '.srt, .txt', class: "form-control-file" %>
-        </div>
-
-        <div class="form-group">
-          <%= form.submit 'Create learning path', class: "btn btn-primary" %>
-        </div>
-
+  <table class="table table-striped my-5">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Base language</th>
+        <th>Target language</th>
+        <th>Details</th>
+        <th>Multiple Choice Mode</th>
+        <th>Translate Mode</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% LearningPath.where(user_id: current_user.id).order(created_at: :desc).each do |path| %>
+        <tr>
+          <td><%= path.title.present? ? path.title : "Untitled" %></td>
+          <td><%= path.base_language.name %></td>
+          <td><%= path.target_language.name %></td>
+          <td>
+            <%= link_to("Show details", "/learning_paths/#{path.id}", class: "btn btn-info") %>
+          </td>
+          <td>
+            <%= link_to("Multiple Choice Mode", flashcards_question_path(learning_path_id: path.id), class: "btn btn-success") %>
+          </td>
+          <td>
+            <%= link_to("Translate Mode", flashcards_quiz_path(learning_path_id: path.id), class: "btn btn-success") %>
+          </td>
+        </tr>
       <% end %>
-
-    </div>
-  </div>
-
-  <hr>
-
-  <div>
-    <div>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Base language</th>
-            <th>Target language</th>
-            <th></th>
-            <th></th>
-            <th> </th>
-          </tr>
-        </thead>
-        <tbody>
-          <% LearningPath.where(user_id: current_user.id).order(created_at: :desc).all.each do |a_learning_path| %>
-            <tr>
-              <td><%= !a_learning_path.title.nil? ? a_learning_path.title : "Untitled" %></td>
-              <td><%= Language.find(a_learning_path.base_language_id).name %></td>
-              <td><%= Language.find(a_learning_path.target_language_id).name %></td>
-              <td>
-                <a href="/learning_paths/<%= a_learning_path.id %>">Show details</a>
-              </td>
-              <td>
-                <%= link_to("Multiple Choice Mode", flashcards_question_path(learning_path_id: a_learning_path.id), class: "btn btn-success btn-sm") %>
-              </td>
-              <td>
-                <%= link_to("Translate Mode", flashcards_quiz_path(learning_path_id: a_learning_path.id), class: "btn btn-success btn-sm") %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <hr>
+    </tbody>
+  </table>
 </div>

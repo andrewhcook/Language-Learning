@@ -17,9 +17,9 @@
   <div class="card">
     <div class="card-body">
       <div class="mb-3">
-        <p>Which translation matches the following phrase?</p>
+        <p class="font-weight-bold">Which translation matches the following phrase?</p>
       </div>
-      <div class="mb-3" value="<%= phrase.id %>">
+      <div class="mb-3 text-primary h5" value="<%= phrase.id %>">
         <%= phrase.body %>
       </div>
     </div>
@@ -27,16 +27,16 @@
 
   <form action="/flashcards/result" method="post" data-turbo="false" class="mt-4">
     <input type="hidden" name="question" value="<%= phrase.id %>">
-    <input type = "hidden" name = "learning_path_id" value = "<%= @learning_path_id %>" >
+    <input type="hidden" name="learning_path_id" value="<%= @learning_path_id %>">
     <div class="form-group">
       <select name="selected_translation" class="form-control">
         <% translations.shuffle.each do |translation| %>
           <option value="<%= translation.id %>">
             <%= translation.body %>
           </option>
-        <% end %>
-      </select>
-    </div>
+        <% end %> 
+      </select> 
+    </div> 
     <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  </form> 
 </div>
