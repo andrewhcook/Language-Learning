@@ -1,8 +1,3 @@
-databases:
-  - name: language_learning_db
-    databaseName: language_learning_db
-    user: language_learning_user
-
 services:
   - type: web
     name: language-learning-app
@@ -12,9 +7,9 @@ services:
     startCommand: "./bin/render-start.sh"
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: language_learning_db
-          database: language_learning_db
-          user: language_learning_user
       - key: SECRET_KEY_BASE
         generateValue: true
+
+databases:
+  - name: language_learning_db
+    plan: data
