@@ -22,12 +22,7 @@ Rails.application.routes.draw do
   # READ
   get("/learning_paths", { :controller => "learning_paths", :action => "index" })
   
-  get("/learning_paths/tutorial", {:controller => "learning_paths", :action => "tutorial"})
-  
-  get("/learning_paths/instructions", {:controller => "learning_paths", :action => "show_instructions"})
-  
   get("/learning_paths/:path_id", { :controller => "learning_paths", :action => "show" })
-  
   
   # DELETE
   get("/delete_learning_path/:path_id", { :controller => "learning_paths", :action => "destroy" })
