@@ -1,4 +1,7 @@
 class LearningPathsController < ApplicationController
+
+  before_action :set_learning_path, only: %i[ show edit update destroy ]
+  before_action :ensure_user_is_authorized, only: [:show]
   def index
     if current_user.nil?
       redirect_to('/users/sign_in')
@@ -73,5 +76,20 @@ class LearningPathsController < ApplicationController
   def show_instructions
     render('/learning_paths/instructions')
   end
+
+  private
+
+  def set_learning_path
+    @learning_path = LearningPath.find(params[:path_id])
+    pp @learning_path
+  end
+
+  def ensure_user_is_authorized
+
+    if !LearningPathPolicy.new(current_user, @learning_path).show?
+      redirect_back fallback_location: root_url
+  end
+
+end
 
 end
