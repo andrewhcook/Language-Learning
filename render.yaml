@@ -2,7 +2,7 @@ services:
   - type: web
     name: language-learning-app
     env: ruby
-    plan: free
+    plan: starter
     buildCommand: "./bin/render-build.sh"
     startCommand: "./bin/render-start.sh"
     envVars:
