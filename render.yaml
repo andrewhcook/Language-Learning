@@ -6,10 +6,8 @@ services:
     buildCommand: "./bin/render-build.sh"
     startCommand: "./bin/render-start.sh"
     envVars:
-      - key: DATABASE_URL
       - key: SECRET_KEY_BASE
         generateValue: true
 
 databases:
   - name: language_learning_db
-    plan: data
