@@ -1,6 +1,6 @@
 
 <% translations = Translation.where(learning_path_id: @learning_path_id) %>
-<% filtered_translations = translations.where(review_status: 0).or(translations.where(review_status:1)) %>
+<% filtered_translations = translations.where(review_status: [1, 0]) %>
 <% card = filtered_translations.sample %>
 <% phrase = Expression.find(card.expression_in_target_language_id) %>
 <% correct_translation = Expression.find(card.expression_in_base_language_id) %>
