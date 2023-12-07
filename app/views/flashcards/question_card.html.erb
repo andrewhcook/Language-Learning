@@ -1,12 +1,13 @@
-<% translations = Translation.where(learning_path_id: @learning_path_id) %>
-<% filtered_translations = translations.where(review_status: [1, 0]) %>
+<% translations_in_path = Translation.where(learning_path_id: @learning_path_id) %>
+<% filtered_translations = translations_in_path.where(review_status: [1, 0]) %>
 <% card = filtered_translations.sample %>
 <% phrase = Expression.find(card.expression_in_target_language_id) %>
 <% correct_translation = Expression.find(card.expression_in_base_language_id) %>
 <% translations = Array.new %>
 <% translations.push(correct_translation) %>
 <% 4.times do %>
-<% incorrect_translation = Expression.all.sample %>
+<% incorrect_translation_id = translations_in_path.all.sample.expression_in_base_language_id %>
+<% incorrect_translation = Expression.find(incorrect_translation_id) %>
 <% translations.push(incorrect_translation) %>
 <% end %>
 

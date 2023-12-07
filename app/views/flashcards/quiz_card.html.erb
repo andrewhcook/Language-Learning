@@ -1,13 +1,13 @@
 
-<% translations = Translation.where(learning_path_id: @learning_path_id) %>
-<% filtered_translations = translations.where(review_status: [1, 0]) %>
+<% translations_in_path = Translation.where(learning_path_id: @learning_path_id) %>
+<% filtered_translations = translations_in_path.where(review_status: [1, 0]) %>
 <% card = filtered_translations.sample %>
 <% phrase = Expression.find(card.expression_in_target_language_id) %>
 <% correct_translation = Expression.find(card.expression_in_base_language_id) %>
 <% translations = Array.new %>
 <% translations.push(correct_translation) %>
 <% 4.times do %>
-<% incorrect_translation = Expression.all.sample %>
+<% incorrect_translation = translations_in_path.all.sample %>
 <% translations.push(incorrect_translation) %>
 <% end %>
 
@@ -21,7 +21,6 @@
       <div id="the_phrase" class="text-primary h5" data-phrase-id="<%= phrase.id %>">
         <%= phrase.body %>
       </div>
-      <!-- <audio id="audioPlayer" class="w-100 mt-3" controls></audio> -->
       <button id="playButton" class="btn btn-primary mt-3">Play Translation</button>
     </div>
     <div class="card-footer text-muted">
