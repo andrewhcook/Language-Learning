@@ -8,8 +8,6 @@ class LearningPathPolicy
   end
 
   def show?
-    pp learning_path
     user.id == learning_path.user_id
   end
-
 end
