@@ -1,5 +1,3 @@
-
-```html
 <h2> 
   LibraFranca
 </h2>
@@ -31,4 +29,3 @@
     This function works by making a call to OpenAi's tts API and handling the response with jquery. This is a very neat feature, and everyone should make sure to check it out!
     </p>
 </div>
-```
