@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
 
   root "homepage#index"
-
+  get "instructions" => "homepage#instructions"
   # file uploader
   post 'upload_file' => 'file_upload#upload'
           
@@ -33,7 +33,11 @@ Rails.application.routes.draw do
   get("flashcards/quiz", {:controller => "flashcards", :action => "show_quiz_card"})
   get("flashcards/show_quiz_results", {:controller => "flashcards", :action => "show_quiz_results"})
   post("/tts", {:controller => "tts", :action => "tts_api_call"})
-  devise_for :users
+  devise_for :users, controllers: {
+  sessions: 'users/sessions',
+  registrations: 'users/registrations'
+}
+
  
   
 end
