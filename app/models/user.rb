@@ -17,7 +17,7 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
-  has_many  :learning_paths, class_name: "LearningPath", foreign_key: "user_id", dependent: :destroy
+  has_many :learning_paths, class_name: 'LearningPath', foreign_key: 'user_id', dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

@@ -1,7 +1,6 @@
 class LearningPathPolicy < ApplicationPolicy
   attr_reader :user, :learning_path
 
-
   def initialize(user, learning_path)
     @user = user
     @learning_path = learning_path

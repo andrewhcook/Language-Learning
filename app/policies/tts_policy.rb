@@ -1,11 +1,11 @@
-class FlashcardPolicy < ApplicationPolicy
+class TtsPolicy < ApplicationPolicy
   attr_reader :user
 
   def initialize(user)
     @user = user
   end
 
-  def show?
-    current_user
+  def trigger?
+    if @user
   end
 end

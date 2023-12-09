@@ -1,5 +1,6 @@
 class TranslationPolicy < ApplicationPolicy
   attr_reader :user, :translation
+
   def initialize(user, translation)
     @user = user
     @translation = translation
@@ -8,5 +9,4 @@ class TranslationPolicy < ApplicationPolicy
   def show?
     LearningPath.find(@translation.learning_path_id).user_id == @user.id
   end
-
 end
