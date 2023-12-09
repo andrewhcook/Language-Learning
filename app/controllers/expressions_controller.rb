@@ -1,4 +1,5 @@
 class ExpressionsController < ApplicationController
+
   def index
     matching_expressions = Expression.all
 
@@ -45,12 +46,4 @@ class ExpressionsController < ApplicationController
     end
   end
 
-  def destroy
-    the_id = params.fetch("path_id")
-    the_expression = Expression.where({ :id => the_id }).at(0)
-
-    the_expression.destroy
-
-    redirect_to("/expressions", { :notice => "Expression deleted successfully."} )
-  end
 end

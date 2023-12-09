@@ -1,4 +1,4 @@
-class FlashcardPolicy
+class FlashcardPolicy < ApplicationPolicy
   attr_reader :user
 
   def initialize(user)

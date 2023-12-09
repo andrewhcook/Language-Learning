@@ -1,11 +1,7 @@
 class TranslationsController < ApplicationController
-  def index
-    matching_translations = Translation.all
 
-    @list_of_translations = matching_translations.order({ :created_at => :desc })
-
-    render({ :template => "translations/index" })
-  end
+  before_action :set_translation, only:  [:show, :update, :destroy, :update_status ]
+  before_action :ensure_user_is_authorized, only:  [:show, :edit, :update, :destroy]
 
   def show
     the_id = params.fetch("path_id")
@@ -74,4 +70,18 @@ class TranslationsController < ApplicationController
     render({:template => "translations/to_see_again"})
   end
 
+  private
+
+  def set_translation
+    @translation = Translation.find(params[:path_id])
+  end
+
+  def ensure_user_is_authorized
+    #phewf this is a tough one to understand for another developer (could have used pluck?)
+    puts current_user
+    puts @learning_path
+    unless TranslationPolicy.new(current_user, @translation).show?
+      redirect_back fallback_location: root_url
+  end
+end
 end

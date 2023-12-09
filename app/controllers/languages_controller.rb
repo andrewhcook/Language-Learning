@@ -30,27 +30,7 @@ class LanguagesController < ApplicationController
     end
   end
 
-  def update
-    the_id = params.fetch("path_id")
-    the_language = Language.where({ :id => the_id }).at(0)
+ 
 
-    the_language.name = params.fetch("query_name")
-    the_language.shortcode = params.fetch("query_shortcode")
-
-    if the_language.valid?
-      the_language.save
-      redirect_to("/languages/#{the_language.id}", { :notice => "Language updated successfully."} )
-    else
-      redirect_to("/languages/#{the_language.id}", { :alert => the_language.errors.full_messages.to_sentence })
-    end
-  end
-
-  def destroy
-    the_id = params.fetch("path_id")
-    the_language = Language.where({ :id => the_id }).at(0)
-
-    the_language.destroy
-
-    redirect_to("/languages", { :notice => "Language deleted successfully."} )
-  end
+  
 end
