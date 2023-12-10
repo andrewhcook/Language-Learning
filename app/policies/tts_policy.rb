@@ -9,3 +9,4 @@ class TtsPolicy < ApplicationPolicy
     if @user
   end
 end
+end
