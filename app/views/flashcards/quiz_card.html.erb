@@ -4,14 +4,6 @@
 <% card = filtered_translations.sample %>
 <% phrase = Expression.find(card.expression_in_target_language_id) %>
 <% correct_translation = Expression.find(card.expression_in_base_language_id) %>
-<% translations = Array.new %>
-<% translations.push(correct_translation) %>
-<% 4.times do %>
-<% incorrect_translation = translations_in_path.all.sample %>
-<% translations.push(incorrect_translation) %>
-<% end %>
-
-
 <div class="container mt-4">
   <div class="card">
     <div class="card-body">

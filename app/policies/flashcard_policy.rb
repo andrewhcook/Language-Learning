@@ -1,4 +1,4 @@
-class FlashcardPolicy
+class FlashcardPolicy < ApplicationPolicy
   attr_reader :user
 
   def initialize(user)
@@ -8,5 +8,4 @@ class FlashcardPolicy
   def show?
     current_user
   end
-
 end

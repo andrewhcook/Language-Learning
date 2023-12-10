@@ -17,15 +17,15 @@ class ParseFileToDatabaseJob < ApplicationJob
           file.each do |line|
             next unless line.valid_encoding?
             next if line.at(0) =~ /\d/ || line.strip.empty?
-            
+
             line.split(/!.?/).each do |a_line|
               counter += 1
               next if counter <= checkpoint
 
               if Expression.where(body: a_line.strip).first.nil?
               elsif Translation.where(learning_path_id: the_learning_path.id)
-                              .where(expression_in_target_language_id: Expression.where(body: a_line.strip).first.id)
-                              .count > 0 || a_line.strip.empty?
+                               .where(expression_in_target_language_id: Expression.where(body: a_line.strip).first.id)
+                               .count > 0 || a_line.strip.empty?
                 next
               end
 

@@ -1,7 +1,7 @@
 class LearningPathsController < ApplicationController
-
-  before_action :set_learning_path, only: %i[ show edit update destroy ]
-  before_action :ensure_user_is_authorized, only: [:show]
+  include Pundit::Authorization
+  before_action :set_learning_path, only: %i[show edit update destroy]
+  before_action :ensure_user_is_authorized, only: %i[show edit update destroy]
   def index
     if current_user.nil?
       redirect_to('/users/sign_in')
@@ -24,7 +24,7 @@ class LearningPathsController < ApplicationController
     the_learning_path = LearningPath.new
     the_learning_path.title = params.fetch('query_title_box')
     the_learning_path.user_id = current_user.id
-    the_learning_path.base_language_id = Language.find( params.fetch('base_language_id_query_box')).id
+    the_learning_path.base_language_id = Language.find(params.fetch('base_language_id_query_box')).id
     the_learning_path.target_language_id = Language.find(params.fetch('target_language_id_query_box')).id
 
     if the_learning_path.valid?
@@ -42,9 +42,9 @@ class LearningPathsController < ApplicationController
         file.write(uploaded_file.read)
       end
       ParseFileToDatabaseJob.perform_later(the_learning_path, uploaded_file.original_filename)
-  else
-    flash[:error] = 'No file selected for upload.'
-  end
+    else
+      flash[:error] = 'No file selected for upload.'
+    end
   end
 
   def update
@@ -81,15 +81,11 @@ class LearningPathsController < ApplicationController
 
   def set_learning_path
     @learning_path = LearningPath.find(params[:path_id])
-    pp @learning_path
   end
 
   def ensure_user_is_authorized
+    return if LearningPathPolicy.new(current_user, @learning_path).show?
 
-    if !LearningPathPolicy.new(current_user, @learning_path).show?
-      redirect_back fallback_location: root_url
+    redirect_back fallback_location: '/learning_paths'
   end
-
-end
-
 end

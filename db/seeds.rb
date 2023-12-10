@@ -7,20 +7,20 @@
 #   Character.create(name: "Luke", movie: movies.first)
 if User.all.length == 0
   user = User.new
-    user.email = "Andrew@example.com"
-    user.password = "password"
-    user.save
+  user.email = 'Andrew@example.com'
+  user.password = 'password'
+  user.save
 end
 
-if Language.find_by(:name => "French").nil?
+if Language.find_by(name: 'French').nil?
   french = Language.new
-  french.name = "French"
-  french.shortcode = "fr"
+  french.name = 'French'
+  french.shortcode = 'fr'
   french.save
 end
-if Language.find_by(:name => "English").nil?
+if Language.find_by(name: 'English').nil?
   english = Language.new
-  english.name = "English"
-  english.shortcode = "en"
+  english.name = 'English'
+  english.shortcode = 'en'
   english.save
 end

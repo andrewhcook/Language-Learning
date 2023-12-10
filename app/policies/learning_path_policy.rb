@@ -1,6 +1,5 @@
-class LearningPathPolicy
+class LearningPathPolicy < ApplicationPolicy
   attr_reader :user, :learning_path
-
 
   def initialize(user, learning_path)
     @user = user
@@ -8,6 +7,6 @@ class LearningPathPolicy
   end
 
   def show?
-    user.id == learning_path.user_id
+    @user.id == @learning_path.user_id
   end
 end
