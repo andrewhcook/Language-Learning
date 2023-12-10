@@ -1,5 +1,5 @@
 class TranslationsController < ApplicationController
-  before_action :set_translation, only: %i[show update destroy update_status]
+  before_action :set_translation, only: %i[show update destroy]
   before_action :ensure_user_is_authorized, only: %i[show edit update destroy]
 
   def show
