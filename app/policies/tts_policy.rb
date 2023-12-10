@@ -6,7 +6,6 @@ class TtsPolicy < ApplicationPolicy
   end
 
   def trigger?
-    if @user
-  end
+    return !@user.nil?
 end
 end

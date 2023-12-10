@@ -1,7 +1,7 @@
 class TtsController < ApplicationController
   # this might be over the top considering this endpoint would be very difficult to target, but this at least forces the user to sign in before abusing text-to-speech programmatically
-  before_action :set_user, :tts_api_call
-  before_action :ensure_user_is_authorized, :tts_api_call
+  before_action :set_user, only: :tts_api_call
+  before_action :ensure_user_is_authorized, only: :tts_api_call
   require 'openai'
 
   def tts_api_call
@@ -15,13 +15,14 @@ class TtsController < ApplicationController
     send_data audio_response, type: 'audio/mp3', disposition: 'inline'
   end
 
+  private
+
   def set_user
     @user = current_user
   end
 
   def ensure_user_is_authorized
     return if TtsPolicy.new(@user).trigger?
-
-    redirect_back fallback_location: '/learning_paths'
+      redirect_back fallback_location: '/learning_paths'
   end
 end
