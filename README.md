@@ -29,3 +29,36 @@
     This function works by making a call to OpenAi's tts API and handling the response with jquery. This is a very neat feature, and everyone should make sure to check it out!
     </p>
 </div>
+
+<h3> Technical Details </h3>
+
+<p>  A user uploads a file and  a call is made to the perform function in the app/jobs/parse_file_to_database.rb file. that function parses the file line by line and makes requests to the translation service </p>
+
+<p> Upon success the translation service responds with the translation in the requested language. This translation, along with the original line is committed to a new Translation model record</p>
+
+
+ <p> After some time there can be an intermittent PG::BAD_CONNECTION error, so there is retry logic in place in the perform function to make the job picks up where it left off in the event of this error. </p>
+
+These records can be viewed in the translation mode, multiple choice mode and "need to review" views. 
+
+<h4> View Locations </h4>
+
+<ul>
+
+<li> app/views/homepage/: the views for the instructions and landing pages </li>
+
+<li> app/views/learning_paths/: views related to the main view </li>
+
+<li>app/views/translations/: views related to individual translations </li>
+<li> app/views/flashcards/: Views related to the multiple choice mode and translation mode </li>
+  
+</ul>
+
+<h4> Controllers </h4>
+<p> Logic related to what is displayed can generally be found in the controllers section </p>
+
+<p> The tts controller contains a function responsible for making requests to Openai and sending the received binary file to the view where the file is assigned to a (jquery) blob and played immediately </p>
+
+<h3>
+<p> Aside from that the app structure generally follows a typical rails application <p>
+</h3>
