@@ -31,29 +31,25 @@
 </div>
 
 
-A user uploads a file
+<p>  A user uploads a file and  a call is made to the perform function in the app/jobs/parse_file_to_database.rb file. that function parses the file line by line and makes requests to the translation service </p>
 
-a call is made to the perform function in the app/jobs/parse_file_to_database.rb file
+<p> upon success the translation service responds with the translation in the requested language. This translation, along with the original line is committed to a new Translation model record</p>
 
-that function parses the file line by line and makes requests to the <hyperlink> translation service </hyperlink>
 
-upon success the translation service responds with the translation in the requested language .
+ <p> After some time there can be an intermittent PG::BAD_CONNECTION error, so there is retry logic in place in the perform function to make the job picks up where it left off in the event of this error. </p>
 
-this translation, along with the original line is committed to a new Translation model record
+These records can be viewed in the translation mode, multiple choice mode and "need to review" views. The location of the logic for those views is described below
 
-after some time there can be an intermittent PG::BAD_CONNECTION error, so there is retry logic in place in the perform function to make the job picks up where it left off in the event of this error.
+<ul>
 
-These records can be viewed in <existing links> and the logic for those programs is described below
+<li> app/views/homepage => the views for the instructions and landing pages </li>
 
-app/views/homepage —
-				the instructions and landing page
+<li> app/views/learning_paths => views related to the main view </li>
 
-app/views/learning_paths
-				views related to the main view
-
-app/views/translations
-				views related to individual translations
-
+<li>app/views/translations => views related to individual translations </li>
+<li> app/views/flashcards/ => Views related to the multiple choice mode and translation mode </li>
+  
+</ul>
 logic related to what is displayed can generally be found in the controllers section
 
 the tts controller contains a function responsible for making requests to openai and sending the received binary file to the view where the
