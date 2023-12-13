@@ -1,10 +1,10 @@
 <h2> 
   LibraFranca
 </h2>
+  <p> This application aims to aid language learning by turning subtitle files into a learning plan!  </p>
 <h3> How it works </h3>
 <div class = "container mt-3">
   
-  <p> This application aims to aid language learning by turning subtitle files into a learning plan!  </p>
   
   <p> It works by taking an uploaded text file, parsing it, and sending a request to an internal translation API</p>
   
