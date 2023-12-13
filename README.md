@@ -59,4 +59,6 @@ These records can be viewed in the translation mode, multiple choice mode and "n
 
 <p> The tts controller contains a function responsible for making requests to Openai and sending the received binary file to the view where the file is assigned to a (jquery) blob and played immediately </p>
 
+<h3>
 <p> Aside from that the app structure generally follows a typical rails application <p>
+</h3>
