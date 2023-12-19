@@ -1,4 +1,5 @@
 class LearningPathsController < ApplicationController
+  # This is inherited from ApplicationController, not needed
   include Pundit::Authorization
   before_action :set_learning_path, only: %i[show edit update destroy]
   before_action :ensure_user_is_authorized, only: %i[show edit update destroy]
@@ -84,6 +85,7 @@ class LearningPathsController < ApplicationController
   end
 
   def ensure_user_is_authorized
+    # can just use pundit helper method `authorize` eg `authorize @learning_path`
     return if LearningPathPolicy.new(current_user, @learning_path).show?
 
     redirect_back fallback_location: '/learning_paths'

@@ -1,8 +1,11 @@
+<!-- why html? industry standard to use markdown for README -->
 <h2> 
   LibraFranca
 </h2>
   <p> This application aims to aid language learning by turning subtitle files into a learning plan!  </p>
 <h3> How it works </h3>
+
+<!-- should be class="container mt-3" -->
 <div class = "container mt-3">
   
   

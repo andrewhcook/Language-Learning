@@ -33,6 +33,7 @@ task({ sample_data: :environment }) do
   learning_path.base_language_id = Language.find_by(name: 'English').id
   learning_path.target_language_id = Language.find_by(name: 'French').id
   ## add user_id
+  # NameError: undefined local variable or method `user' for main:Object
   learning_path.user_id = user.id
   learning_path.save
   sample_data_files = []
@@ -40,6 +41,7 @@ task({ sample_data: :environment }) do
     tempfile: Rails.root.join('lib', 'sample_data',
                               'Amelie_Sample_Data.txt').open, filename: 'Amelie_Sample_Data.txt', type: 'text/plain'
   )
+  # NITPIK: usually good to keep sample data files all 1 word, no spaces
   sample_data_file2 = ActionDispatch::Http::UploadedFile.new(
     tempfile: Rails.root.join('lib', 'sample_data',
                               'A Bout de Souffle.fre.srt').open, filename: 'A Bout de Souffle.fre.srt', type: 'text/plain'

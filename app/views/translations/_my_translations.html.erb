@@ -1,3 +1,5 @@
+<%# could this just be called _table.html.erb? %>
+<%# it's in the translations folder %>
 <% user_id = current_user.id %>
 <% learning_id = LearningPath.find_by(user_id: user_id).id %>
 <table border="1">

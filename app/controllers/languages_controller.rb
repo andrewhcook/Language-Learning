@@ -10,10 +10,12 @@ class LanguagesController < ApplicationController
   def show
     the_id = params.fetch('path_id')
 
+    # could use language = Language.find_by(id: the_id)
     matching_languages = Language.where({ id: the_id })
 
     @the_language = matching_languages.at(0)
 
+    # don't need this render, it's assumed since we're in show action 😎
     render({ template: 'languages/show' })
   end
 

@@ -3,6 +3,8 @@ class ParseFileToDatabaseJob < ApplicationJob
   MAX_RETRIES = 10
   retry_on HTTP::ConnectionError, wait: :exponentially_longer, attempts: MAX_RETRIES
 
+  # TODO: would be cleaner to put this logic in the LearningPath model
+  # that way you could do something like `the_learning_path.ingest_file(original_filename)`
   def perform(the_learning_path, original_filename)
     ActiveRecord::Base.connection_pool.with_connection do
       sample_file = ActionDispatch::Http::UploadedFile.new(

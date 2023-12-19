@@ -6,6 +6,8 @@ class TtsPolicy < ApplicationPolicy
   end
 
   def trigger?
+    # could use ActiveSupport#present?
+    # @user.present?
     return !@user.nil?
 end
 end
